@@ -305,7 +305,7 @@ export default {
       data: [
         {
           id: 1,
-          type: 'Channel',
+          type: 'Partners',
           reward: '+5 $FUCK',
           link: 'https://t.me/Greenwoods_Community',
           completed: false,
