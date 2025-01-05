@@ -85,7 +85,7 @@
 .refs {
   margin-top: 15px;
   display: grid;
-  gap: 5px; /* Уменьшен отступ между заданиями */
+  gap: 3px; /* Уменьшен отступ между заданиями */
   padding: 0 20px;
 }
 
@@ -114,7 +114,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 25px; /* Уменьшена высота нижней панели */
+  height: 30px; /* Уменьшена высота нижней панели */
   display: flex;
   justify-content: space-around;
   align-items: center;
