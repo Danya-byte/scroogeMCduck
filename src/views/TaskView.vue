@@ -127,7 +127,7 @@
 }
 
 .refs li {
-  width: 120%;
+  width: 110%;
   padding: 0 5px 15px 5px;
   display: flex;
   justify-content: space-between;
@@ -162,8 +162,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-top-left-radius: 20px; /* Скругление слева */
+  border-top-right-radius: 20px; /* Скругление справа */
 }
 
 .bar .nav-item {
