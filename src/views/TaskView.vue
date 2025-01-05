@@ -1,7 +1,7 @@
 <template>
   <div class="task-board">
     <!-- Заголовок и картинка -->
-    <div style="display: grid; align-items: center; justify-content: center; margin-top: 40px;">
+    <div style="display: grid; align-items: center; justify-content: center; margin-top: 50px;">
       <img width="90px" height="90px" src="https://em-content.zobj.net/source/telegram/386/sparkles_2728.webp" />
     </div>
     <div class="leader-title" style="margin-top: 50px;">
