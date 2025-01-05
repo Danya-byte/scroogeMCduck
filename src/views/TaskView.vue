@@ -96,9 +96,12 @@
     </div>
 
     <!-- Сообщение об успешном присоединении -->
-    <div v-if="showSuccessMessage" class="success-message">
-      <p>Reward: {{ currentReward }}</p>
-      <div class="fireworks"></div>
+    <div v-if="showSuccessMessage" class="success-message-container">
+      <div class="fireworks left"></div>
+      <div class="success-message">
+        <p>Reward: {{ currentReward }}</p>
+      </div>
+      <div class="fireworks right"></div>
     </div>
   </div>
 </template>
@@ -127,7 +130,7 @@
 }
 
 .refs li {
-  width: 101%;
+  width: 100%;
   padding: 0 5px 15px 5px;
   display: flex;
   justify-content: space-between;
@@ -150,6 +153,9 @@
   padding-bottom: 30px;
   display: grid;
   gap: 5px;
+  max-width: 800px; /* Ограничиваем максимальную ширину контейнера задач */
+  margin-left: auto; /* Центрируем контейнер */
+  margin-right: auto; /* Центрируем контейнер */
 }
 
 .bar {
@@ -270,17 +276,25 @@
 }
 
 /* Сообщение об успешном присоединении */
-.success-message {
+.success-message-container {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.success-message {
   background: #3390ec;
   color: white;
   padding: 20px;
   border-radius: 10px;
-  z-index: 1000;
   animation: fadeInOut 3s ease-in-out;
+  position: relative;
+  z-index: 2;
 }
 
 @keyframes fadeInOut {
@@ -288,6 +302,66 @@
   10% { opacity: 1; }
   90% { opacity: 1; }
   100% { opacity: 0; }
+}
+
+/* Анимация салюта */
+.fireworks {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.fireworks.left {
+  left: -120px; /* Салют слева от сообщения */
+}
+
+.fireworks.right {
+  right: -120px; /* Салют справа от сообщения */
+}
+
+.fireworks::before,
+.fireworks::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/sparkles_2728.png') no-repeat center center;
+  background-size: contain;
+  animation: fireworksAnimation 1s ease-in-out;
+}
+
+.fireworks.left::before {
+  top: 0;
+  left: 0;
+  animation-delay: 0s;
+}
+
+.fireworks.left::after {
+  top: 50%;
+  left: 50%;
+  animation-delay: 0.5s;
+}
+
+.fireworks.right::before {
+  top: 0;
+  right: 0;
+  animation-delay: 0s;
+}
+
+.fireworks.right::after {
+  top: 50%;
+  right: 50%;
+  animation-delay: 0.5s;
+}
+
+@keyframes fireworksAnimation {
+  0% { transform: translateY(0) scale(0); opacity: 0; }
+  50% { transform: translateY(-50px) scale(1); opacity: 1; }
+  100% { transform: translateY(-100px) scale(0); opacity: 0; }
 }
 
 /* Зеленая галочка и прозрачный зеленый фон */
@@ -336,43 +410,6 @@
   0% { transform: translate(-50%, -50%) scale(0); }
   50% { transform: translate(-50%, -50%) scale(1.2); }
   100% { transform: translate(-50%, -50%) scale(1); }
-}
-
-/* Анимация салюта */
-.fireworks {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.fireworks::before,
-.fireworks::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 20px;
-  height: 20px;
-  background: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/sparkles_2728.png') no-repeat center center;
-  background-size: contain;
-  animation: fireworksAnimation 1s ease-in-out;
-}
-
-.fireworks::before {
-  left: 10%;
-}
-
-.fireworks::after {
-  right: 10%;
-}
-
-@keyframes fireworksAnimation {
-  0% { transform: translateY(0) scale(0); opacity: 0; }
-  50% { transform: translateY(-50px) scale(1); opacity: 1; }
-  100% { transform: translateY(-100px) scale(0); opacity: 0; }
 }
 </style>
 
