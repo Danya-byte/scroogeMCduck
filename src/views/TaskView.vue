@@ -98,6 +98,7 @@
     <!-- Сообщение об успешном присоединении -->
     <div v-if="showSuccessMessage" class="success-message">
       <p>Reward: {{ currentReward }}</p>
+      <div class="fireworks"></div>
     </div>
   </div>
 </template>
@@ -428,7 +429,18 @@ export default {
           this.showModal = true; // Показываем модальное окно после возвращения
           break;
         case 'Transaction':
-          this.performTransaction(item);
+          this.openTelegramLink(item.link); // Переход по ссылке
+          this.currentReward = item.reward; // Сохраняем награду
+          this.showSuccessMessage = true; // Показываем сообщение о награде
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+          }, 3000);
+
+          // Помечаем задачу как выполненную
+          const task = this.data.find((t) => t.id === item.id);
+          if (task) {
+            task.completed = true;
+          }
           break;
         default:
           console.log('Неизвестный тип задачи:', item.type);
@@ -441,21 +453,6 @@ export default {
       } else {
         // Если мини-приложение Telegram не доступно, открываем ссылку в новой вкладке
         window.open(url, '_blank');
-      }
-    },
-    performTransaction(item) {
-      // Пример выполнения транзакции
-      console.log('Transaction to:', item);
-      this.showSuccessMessage = true;
-      this.currentReward = item.reward; // Сохраняем награду
-      setTimeout(() => {
-        this.showSuccessMessage = false;
-      }, 3000);
-
-      // Помечаем задачу как выполненную
-      const task = this.data.find((t) => t.id === item.id);
-      if (task) {
-        task.completed = true;
       }
     },
     handleCheck() {
