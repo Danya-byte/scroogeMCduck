@@ -26,7 +26,7 @@
                 style="border-radius: 50px;"
                 width="40px"
                 height="40px"
-                src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png"
+                src="https://i.postimg.cc/66MKNfLs/D81-A5-CE1-57-CE-4417-A490-91-BCEF9-F5-B68.png"
               />
             </div>
             <div>
