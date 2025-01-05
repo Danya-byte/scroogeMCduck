@@ -11,15 +11,15 @@
         <div class="bar">
           <RouterLink to="/task">
             <img src="https://i.postimg.cc/kGxp19cP/5-CFA8313-0975-4-AE0-9986-E13-E9-B754-C11.png" width="40px" style="position: absolute; margin-left: 50vw; margin-top: 1vw;">
-               <button class="task">Task</button>
+               <button class="task"></button>
           </RouterLink>
           <RouterLink to="/leader">
             <img src="https://i.postimg.cc/pLFMzbNx/DC99-DC47-4-E36-454-D-ADAE-8-EBF88812855.png" width="55px" style="position: absolute; margin-left: 8vw;">
-              <button class="game">Game</button>
+              <button class="game"></button>
           </RouterLink>
           <RouterLink to="/leader">
             <img src="https://i.postimg.cc/tCz2cBhP/D384540-F-C585-455-C-AAB5-D10-FA58774-B2.png" width="50px" style="position: absolute; margin-left: 12vw; margin-top: 3vw">
-              <button class="soon">Leaders</button>
+              <button class="soon"></button>
           </RouterLink>
         </div>
 </div>
