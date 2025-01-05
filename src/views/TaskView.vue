@@ -42,7 +42,7 @@
             </div>
           </div>
           <div style="display: grid; align-items: center;">
-            <h1 class="start-button" @click="handleStart(item)">Start</h1> <!-- Обработчик события -->
+            <h1 class="start-button" @click="handleStart(item)">Start</h1>
           </div>
         </li>
       </ul>
@@ -50,15 +50,15 @@
 
     <!-- Нижняя панель навигации -->
     <div class="bar">
-      <RouterLink to="/task" class="nav-item">
+      <RouterLink to="/task" class="nav-item" :class="{ active: $route.path === '/task' }">
         <img src="https://i.postimg.cc/kGxp19cP/5-CFA8313-0975-4-AE0-9986-E13-E9-B754-C11.png" width="40px">
         <button class="task"></button>
       </RouterLink>
-      <RouterLink to="/" class="nav-item">
+      <RouterLink to="/" class="nav-item" :class="{ active: $route.path === '/' }">
         <img src="https://i.postimg.cc/66MKNfLs/D81-A5-CE1-57-CE-4417-A490-91-BCEF9-F5-B68.png" width="55px">
         <button class="game"></button>
       </RouterLink>
-      <RouterLink to="/leader" class="nav-item">
+      <RouterLink to="/leader" class="nav-item" :class="{ active: $route.path === '/leader' }">
         <img src="https://i.postimg.cc/fRPzxjgn/0-F65-F8-E0-D77-D-464-C-B669-07-F0287-ABD7-C.png" width="50px">
         <button class="soon"></button>
       </RouterLink>
@@ -135,6 +135,10 @@
   flex: 1;
 }
 
+.bar .nav-item.active img {
+  filter: brightness(1.5); /* Подсветка активной иконки */
+}
+
 .bar button {
   background: none;
   border: none;
@@ -175,25 +179,25 @@ export default {
           id: 1,
           type: 'Partners',
           reward: '+5 $FUCK',
-          link: 'https://example.com/partners', // Пример ссылки для партнеров
+          link: 'https://example.com/partners',
         },
         {
           id: 2,
           type: 'Transaction',
           reward: '+10 $FUCK',
-          link: 'https://example.com/transaction', // Пример ссылки для транзакции
+          link: 'https://example.com/transaction',
         },
         {
           id: 3,
           type: 'Channel',
           reward: '+15 $FUCK',
-          link: 'https://t.me/your_channel', // Пример ссылки на канал
+          link: 'https://t.me/your_channel',
         },
         {
           id: 4,
           type: 'TEST',
           reward: '+15 $FUCK',
-          link: 'https://example.com/test', // Пример ссылки для теста
+          link: 'https://example.com/test',
         },
       ],
     };
@@ -203,13 +207,13 @@ export default {
       // Обработка клика в зависимости от типа задачи
       switch (item.type) {
         case 'Channel':
-          window.open(item.link, '_blank'); // Открыть канал в новой вкладке
+          window.open(item.link, '_blank');
           break;
         case 'Transaction':
-          this.performTransaction(item); // Выполнить транзакцию
+          this.performTransaction(item);
           break;
         case 'Partners':
-          window.open(item.link, '_blank'); // Перейти на страницу партнера
+          window.open(item.link, '_blank');
           break;
         default:
           console.log('Неизвестный тип задачи:', item.type);
@@ -218,8 +222,27 @@ export default {
     performTransaction(item) {
       // Пример выполнения транзакции
       console.log('Transaction to:', item);
-      // Здесь можно добавить вызов API или другую логику
-      showMessage(`Transaction completed! Награда: ${item.reward}`);
+      this.showMessages(`Transaction completed! Награда: ${item.reward}`);
+    },
+    showMessages(message) {
+      // Пример реализации показа сообщения (можно заменить на toast или модальное окно)
+      const messageElement = document.createElement('div');
+      messageElement.style.position = 'fixed';
+      messageElement.style.bottom = '20px';
+      messageElement.style.right = '20px';
+      messageElement.style.backgroundColor = '#3390ec';
+      messageElement.style.color = 'white';
+      messageElement.style.padding = '10px 20px';
+      messageElement.style.borderRadius = '5px';
+      messageElement.style.zIndex = '1000';
+      messageElement.textContent = message;
+
+      document.body.appendChild(messageElement);
+
+      // Удаление сообщения через 3 секунды
+      setTimeout(() => {
+        document.body.removeChild(messageElement);
+      }, 3000);
     },
   },
 };
