@@ -179,19 +179,19 @@ export default {
           id: 1,
           type: 'Partners',
           reward: '+5 $FUCK',
-          link: 'https://example.com/partners',
+          link: 'https://t.me/Greenwoods_Community',
         },
         {
           id: 2,
           type: 'Transaction',
           reward: '+10 $FUCK',
-          link: 'https://example.com/transaction',
+          link: 'https://t.me/blum/app?startapp=memepadjetton_SCMD69_Stje1-ref_2rrmsdCh93',
         },
         {
           id: 3,
           type: 'Channel',
           reward: '+15 $FUCK',
-          link: 'https://t.me/your_channel',
+          link: 'https://t.me/FreeScroogy69',
         },
         {
           id: 4,
