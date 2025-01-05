@@ -69,7 +69,7 @@
       <div class="modal">
         <div class="modal-content">
           <img src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png" width="80px" height="80px" style="border-radius: 50%;">
-          <p style="margin-top: 10px; font-size: 16px; color: #fff;">Подпишитесь на канал:</p>
+          <p style="margin-top: 10px; font-size: 16px; color: #fff;">Subscribe to the channel:</p>
           <a :href="currentLink" target="_blank" style="color: #3390ec; text-decoration: none;">{{ currentLink }}</a>
           <div style="display: flex; gap: 10px; margin-top: 20px;">
             <button class="modal-button check" @click="handleCheck">Check</button>
@@ -81,7 +81,7 @@
 
     <!-- Сообщение об успешном присоединении -->
     <div v-if="showSuccessMessage" class="success-message">
-      <p>Вы успешно присоединились! Награда: {{ currentReward }}</p>
+      <p>Success Reward: {{ currentReward }}</p>
     </div>
   </div>
 </template>
