@@ -127,7 +127,7 @@
 }
 
 .refs li {
-  width: 105%;
+  width: 101%;
   padding: 0 5px 15px 5px;
   display: flex;
   justify-content: space-between;
