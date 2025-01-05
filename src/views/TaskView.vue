@@ -11,7 +11,7 @@
     <!-- Список задач -->
     <section class="tasks" style="margin-top: 40px;">
       <ul class="refs">
-        <li v-for="(item) in data" :key="item.id">
+        <li v-for="(item) in data" :key="item.id" :class="{ 'completed-task': item.completed }">
           <div class="about">
             <div style="display: flex; align-items: center; justify-content: center;">
               <img
@@ -50,6 +50,7 @@
               {{ item.completed ? 'Completed' : 'Start' }}
             </h1>
           </div>
+          <div v-if="item.completed" class="fireworks"></div>
         </li>
       </ul>
     </section>
@@ -133,6 +134,7 @@
   border: 1px solid #444444;
   border-radius: 10px;
   padding: 10px;
+  position: relative;
 }
 
 .about {
@@ -296,6 +298,81 @@
   justify-content: center;
   align-items: center;
 }
+
+/* Стили для завершенных задач */
+.completed-task {
+  position: relative;
+  overflow: hidden;
+}
+
+.completed-task::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(76, 175, 80, 0.3); /* Прозрачный зеленый */
+  z-index: 1;
+}
+
+.completed-task .start-button {
+  background-color: #4CAF50; /* Зеленый цвет для кнопки */
+  color: white;
+  cursor: not-allowed;
+}
+
+.completed-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  animation: checkmarkAnimation 0.5s ease-in-out;
+}
+
+@keyframes checkmarkAnimation {
+  0% { transform: translate(-50%, -50%) scale(0); }
+  50% { transform: translate(-50%, -50%) scale(1.2); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Анимация салюта */
+.fireworks {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.fireworks::before,
+.fireworks::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/sparkles_2728.png') no-repeat center center;
+  background-size: contain;
+  animation: fireworksAnimation 1s ease-in-out;
+}
+
+.fireworks::before {
+  left: 10%;
+}
+
+.fireworks::after {
+  right: 10%;
+}
+
+@keyframes fireworksAnimation {
+  0% { transform: translateY(0) scale(0); opacity: 0; }
+  50% { transform: translateY(-50px) scale(1); opacity: 1; }
+  100% { transform: translateY(-100px) scale(0); opacity: 0; }
+}
 </style>
 
 <script>
@@ -389,6 +466,9 @@ export default {
       if (task) {
         task.completed = true;
       }
+
+      // Закрываем модальное окно
+      this.showModal = false;
     },
     handleGo() {
       // Обработка нажатия на кнопку Go
