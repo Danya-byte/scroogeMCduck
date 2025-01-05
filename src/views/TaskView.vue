@@ -90,7 +90,7 @@
 }
 
 .refs li {
-  width: 99%;
+  width: 100%;
   padding: 0 5px 15px 5px;
   display: flex;
   justify-content: space-between;
