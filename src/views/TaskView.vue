@@ -71,7 +71,7 @@
       </RouterLink>
     </div>
 
-    <!-- Модальное окно после возвращения из канала -->
+    <!-- Модальное окно после возвращения из канала или партнеров -->
     <div v-if="showModal" class="modal-overlay">
       <div class="modal">
         <div class="modal-content">
@@ -421,6 +421,7 @@ export default {
       // Обработка клика в зависимости от типа задачи
       switch (item.type) {
         case 'Channel':
+        case 'Partners':
           this.openTelegramLink(item.link);
           this.currentLink = item.link; // Сохраняем ссылку для модального окна
           this.currentReward = item.reward; // Сохраняем награду
@@ -428,9 +429,6 @@ export default {
           break;
         case 'Transaction':
           this.performTransaction(item);
-          break;
-        case 'Partners':
-          this.openTelegramLink(item.link);
           break;
         default:
           console.log('Неизвестный тип задачи:', item.type);
@@ -449,9 +447,16 @@ export default {
       // Пример выполнения транзакции
       console.log('Transaction to:', item);
       this.showSuccessMessage = true;
+      this.currentReward = item.reward; // Сохраняем награду
       setTimeout(() => {
         this.showSuccessMessage = false;
       }, 3000);
+
+      // Помечаем задачу как выполненную
+      const task = this.data.find((t) => t.id === item.id);
+      if (task) {
+        task.completed = true;
+      }
     },
     handleCheck() {
       // Обработка нажатия на кнопку Check
