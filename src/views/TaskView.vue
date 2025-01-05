@@ -114,7 +114,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 40px; /* Уменьшена высота нижней панели */
+  height: 45px; /* Уменьшена высота нижней панели */
   display: flex;
   justify-content: space-around;
   align-items: center;
