@@ -105,6 +105,7 @@
 .tasks {
   padding: 10px;
   margin-top: 30px;
+  padding-bottom: 80px; /* Увеличен отступ снизу */
   display: grid;
   gap: 5px;
 }
@@ -116,9 +117,9 @@
   width: 100%;
   height: 45px;
   display: flex;
-  justify-content: space-between; /* Равномерное распределение */
+  justify-content: space-between;
   align-items: center;
-  padding: 0 20px; /* Отступы по бокам */
+  padding: 0 20px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
@@ -127,7 +128,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1; /* Равномерное распределение пространства */
+  flex: 1;
 }
 
 .bar button {
