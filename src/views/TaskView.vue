@@ -135,12 +135,12 @@ export default {
         {
           id: 1,
           type: 'Channel',
-          reward: '+500 EWE',
+          reward: '+5 $FUCK',
         },
         {
           id: 2,
-          type: 'Channel',
-          reward: '+1000 EWI',
+          type: 'Transaction',
+          reward: '+1 $FUCK',
         },
       ],
     };
