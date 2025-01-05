@@ -17,14 +17,14 @@
                 style="border-radius: 50px;"
                 width="40px"
                 height="40px"
-                src="../../assets/telegramlogo.jpeg"
+
               />
               <img
                 v-if="item.type == 'Transaction'"
                 style="border-radius: 50px;"
                 width="40px"
                 height="40px"
-                src="../../assets/telegramlogo.jpeg"
+
               />
             </div>
             <div>
