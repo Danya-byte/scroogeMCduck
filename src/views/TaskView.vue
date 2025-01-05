@@ -152,7 +152,7 @@ export default {
         {
           id: 3,
           type: 'Channel',
-          reward: '+10 $FUCK',
+          reward: '+15 $FUCK',
         },
       ],
     };
