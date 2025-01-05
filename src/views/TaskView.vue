@@ -63,6 +63,26 @@
         <button class="soon"></button>
       </RouterLink>
     </div>
+
+    <!-- Модальное окно после возвращения из канала -->
+    <div v-if="showModal" class="modal-overlay">
+      <div class="modal">
+        <div class="modal-content">
+          <img src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png" width="80px" height="80px" style="border-radius: 50%;">
+          <p style="margin-top: 10px; font-size: 16px; color: #fff;">Подпишитесь на канал:</p>
+          <a :href="currentLink" target="_blank" style="color: #3390ec; text-decoration: none;">{{ currentLink }}</a>
+          <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button class="modal-button check" @click="handleCheck">Check</button>
+            <button class="modal-button go" @click="handleGo">Go</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Сообщение об успешном присоединении -->
+    <div v-if="showSuccessMessage" class="success-message">
+      <p>Вы успешно присоединились! Награда: {{ currentReward }}</p>
+    </div>
   </div>
 </template>
 
@@ -168,6 +188,82 @@
   background-color: #3390ec;
   color: white;
 }
+
+/* Модальное окно */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #2c2c2e;
+  border-radius: 15px;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.modal-button.check {
+  background-color: #3390ec;
+  color: white;
+}
+
+.modal-button.check:hover {
+  background-color: #2a7bbf;
+}
+
+.modal-button.go {
+  background-color: #444444;
+  color: white;
+}
+
+.modal-button.go:hover {
+  background-color: #555555;
+}
+
+/* Сообщение об успешном присоединении */
+.success-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #3390ec;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1000;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
 </style>
 
 <script>
@@ -177,7 +273,7 @@ export default {
       data: [
         {
           id: 1,
-          type: 'Partners',
+          type: 'Channel',
           reward: '+5 $FUCK',
           link: 'https://t.me/Greenwoods_Community',
         },
@@ -200,6 +296,10 @@ export default {
           link: 'https://example.com/test',
         },
       ],
+      showModal: false, // Показывать ли модальное окно
+      showSuccessMessage: false, // Показывать ли сообщение об успехе
+      currentLink: '', // Текущая ссылка для модального окна
+      currentReward: '', // Текущая награда для сообщения
     };
   },
   methods: {
@@ -207,42 +307,50 @@ export default {
       // Обработка клика в зависимости от типа задачи
       switch (item.type) {
         case 'Channel':
-          window.open(item.link, '_blank');
+          this.openTelegramLink(item.link);
+          this.currentLink = item.link; // Сохраняем ссылку для модального окна
+          this.currentReward = item.reward; // Сохраняем награду
+          this.showModal = true; // Показываем модальное окно после возвращения
           break;
         case 'Transaction':
           this.performTransaction(item);
           break;
         case 'Partners':
-          window.open(item.link, '_blank');
+          this.openTelegramLink(item.link);
           break;
         default:
           console.log('Неизвестный тип задачи:', item.type);
       }
     },
+    openTelegramLink(url) {
+      // Используем метод Telegram WebApp для открытия ссылки
+      if (window.Telegram && window.Telegram.WebApp) {
+        window.Telegram.WebApp.openLink(url, { try_instant_view: true });
+      } else {
+        // Если мини-приложение Telegram не доступно, открываем ссылку в новой вкладке
+        window.open(url, '_blank');
+      }
+    },
     performTransaction(item) {
       // Пример выполнения транзакции
       console.log('Transaction to:', item);
-      this.showMessages(`Transaction completed! Награда: ${item.reward}`);
-    },
-    showMessages(message) {
-      // Пример реализации показа сообщения (можно заменить на toast или модальное окно)
-      const messageElement = document.createElement('div');
-      messageElement.style.position = 'fixed';
-      messageElement.style.bottom = '20px';
-      messageElement.style.right = '20px';
-      messageElement.style.backgroundColor = '#3390ec';
-      messageElement.style.color = 'white';
-      messageElement.style.padding = '10px 20px';
-      messageElement.style.borderRadius = '5px';
-      messageElement.style.zIndex = '1000';
-      messageElement.textContent = message;
-
-      document.body.appendChild(messageElement);
-
-      // Удаление сообщения через 3 секунды
+      this.showSuccessMessage = true;
       setTimeout(() => {
-        document.body.removeChild(messageElement);
+        this.showSuccessMessage = false;
       }, 3000);
+    },
+    handleCheck() {
+      // Обработка нажатия на кнопку Check
+      this.showModal = false; // Закрываем модальное окно
+      this.showSuccessMessage = true; // Показываем сообщение об успехе
+      setTimeout(() => {
+        this.showSuccessMessage = false;
+      }, 3000);
+    },
+    handleGo() {
+      // Обработка нажатия на кнопку Go
+      this.showModal = false; // Закрываем модальное окно
+      window.open(this.currentLink, '_blank'); // Открываем ссылку в новой вкладке
     },
   },
 };
