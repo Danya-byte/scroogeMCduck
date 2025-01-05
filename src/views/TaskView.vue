@@ -3,24 +3,29 @@
     <center>
       <img src="https://em-content.zobj.net/source/telegram/386/money-bag_1f4b0.webp" width="220px" style="margin-top: 50px;">
     </center>
-    <h1 style="color: white; font-family: Geologica;">Task</h1>
-    <div class="backtask">
-      <img src="https://i.postimg.cc/mZnL0Gsf/2-C2-FD02-E-0-BB2-4-E91-A52-A-FAF4-BB160-FD3.png" width="50px" style="margin-top: 10px; margin-left: 5px;">
-      <h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Check Channel</h3>
-      <a href="https://t.me/Greenwoods_Community" target="_blank"><button class="check">Check</button></a>
-    </div>
-    <div class="backtask" style="margin-top: 10px;">
-      <img src="https://i.postimg.cc/gj5cjhgV/CF8-B7771-2095-45-F1-AF17-ADE4-D690-A29-E.png" width="50px" style="margin-top: 10px; margin-left: 5px;">
-      <h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Check Channel</h3>
-      <a href="https://t.me/FreeScroogy69" target="_blank"><button class="check">Check</button></a>
-    </div>
-    <div class="backtask" style="margin-top: 10px;">
-      <img src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png" width="50px" style="margin-top: 10px; margin-left: 5px;">
-      <h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Buy Token</h3>
-      <a href="https://t.me/blum/app?startapp=memepadjetton_SCMD69_Stje1-ref_2rrmsdCh93" target="_blank"><button class="check">Buy</button></a>
+    <h1 class="fixed-title">Task</h1>
+
+    <!-- Фиксированные блоки с задачами -->
+    <div class="fixed-task-container">
+      <div class="backtask">
+        <img src="https://i.postimg.cc/mZnL0Gsf/2-C2-FD02-E-0-BB2-4-E91-A52-A-FAF4-BB160-FD3.png" width="50px" style="margin-top: 10px; margin-left: 5px;">
+        <h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Check Channel</h3>
+        <a href="https://t.me/Greenwoods_Community" target="_blank"><button class="check">Check</button></a>
+      </div>
+      <div class="backtask" style="margin-top: 10px;">
+        <img src="https://i.postimg.cc/gj5cjhgV/CF8-B7771-2095-45-F1-AF17-ADE4-D690-A29-E.png" width="50px" style="margin-top: 10px; margin-left: 5px;">
+        <h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Check Channel</h3>
+        <a href="https://t.me/FreeScroogy69" target="_blank"><button class="check">Check</button></a>
+      </div>
+      <div class="backtask" style="margin-top: 10px;">
+        <img src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png" width="50px" style="margin-top: 10px; margin-left: 5px;">
+        <h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Buy Token</h3>
+        <a href="https://t.me/blum/app?startapp=memepadjetton_SCMD69_Stje1-ref_2rrmsdCh93" target="_blank"><button class="check">Buy</button></a>
+      </div>
     </div>
   </div>
 
+  <!-- Нижняя панель -->
   <div class="bar">
     <RouterLink to="/task">
       <img src="https://i.postimg.cc/MKmL16Hy/3164-B3-A9-E06-A-42-A6-82-DC-1-AFA9-B7095-E8.png" width="40px" style="position: absolute; margin-left: 50vw; margin-top: 1vw">
@@ -44,12 +49,38 @@ body {
   color: white;
   touch-action: none;
   overflow-y: scroll;
+  margin: 0; /* Убираем отступы по умолчанию */
 }
 
 .content-container {
   height: 80vh; /* Задайте высоту контейнера, чтобы он занимал 80% высоты экрана */
   overflow-y: scroll; /* Включите вертикальную прокрутку */
+  padding-top: 200px; /* Добавьте отступ сверху, чтобы контент не перекрывался с заголовком и задачами */
   padding-bottom: 100px; /* Добавьте отступ снизу, чтобы контент не перекрывался с нижней панелью */
+}
+
+.fixed-title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #3b3b3b; /* Цвет фона заголовка */
+  z-index: 1000; /* Убедитесь, что заголовок находится поверх других элементов */
+  padding: 20px 0;
+  text-align: center;
+  color: white;
+  font-family: Geologica;
+  margin: 0; /* Убираем отступы по умолчанию */
+}
+
+.fixed-task-container {
+  position: fixed;
+  top: 100px; /* Отступ от заголовка */
+  left: 0;
+  width: 100%;
+  z-index: 999; /* Убедитесь, что задачи находятся под заголовком, но над контентом */
+  background-color: #3b3b3b; /* Цвет фона, чтобы задачи не сливались с контентом */
+  padding: 10px 0;
 }
 
 .check {
@@ -73,6 +104,7 @@ body {
   margin-left: -40vw;
   position: fixed;
   overflow: hidden;
+  z-index: 1000; /* Убедитесь, что панель находится поверх других элементов */
 }
 
 .task {
@@ -112,5 +144,6 @@ body {
   background-color: #2c2c2e;
   height: 70px;
   border-radius: 15px;
+  margin-top: 10px; /* Добавьте отступ между блоками */
 }
 </style>
