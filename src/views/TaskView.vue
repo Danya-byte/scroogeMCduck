@@ -1,12 +1,14 @@
 <template>
-  <div class="task-board open">
-    <div class="back" @click="this.$emit('close')">Back</div>
-    <div style="display: grid; align-items: center; justify-content: center;">
+  <div class="task-board">
+    <!-- Заголовок и картинка -->
+    <div style="display: grid; align-items: center; justify-content: center; margin-top: 20px;">
       <img width="65px" height="65px" src="https://em-content.zobj.net/source/telegram/386/sparkles_2728.webp" />
     </div>
     <div class="leader-title">
       <h1 style="color: #f0f0f0; text-align: center;">Tasks</h1>
     </div>
+
+    <!-- Список задач -->
     <section class="tasks">
       <ul class="refs">
         <li v-for="(item) in data" :key="item.id">
@@ -17,14 +19,14 @@
                 style="border-radius: 50px;"
                 width="40px"
                 height="40px"
-
+                src="https://i.postimg.cc/mZnL0Gsf/2-C2-FD02-E-0-BB2-4-E91-A52-A-FAF4-BB160-FD3.png"
               />
               <img
                 v-if="item.type == 'Transaction'"
                 style="border-radius: 50px;"
                 width="40px"
                 height="40px"
-
+                src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png"
               />
             </div>
             <div>
@@ -38,67 +40,46 @@
         </li>
       </ul>
     </section>
+
+    <!-- Нижняя панель навигации -->
+    <div class="bar">
+      <RouterLink to="/task">
+        <img src="https://i.postimg.cc/kGxp19cP/5-CFA8313-0975-4-AE0-9986-E13-E9-B754-C11.png" width="40px" style="position: absolute; margin-left: 50vw; margin-top: 1vw">
+        <button class="task"></button>
+      </RouterLink>
+      <RouterLink to="/">
+        <img src="https://i.postimg.cc/66MKNfLs/D81-A5-CE1-57-CE-4417-A490-91-BCEF9-F5-B68.png" width="55px" style="position: absolute; margin-left: 8vw;">
+        <button class="game"></button>
+      </RouterLink>
+      <RouterLink to="/leader">
+        <img src="https://i.postimg.cc/fRPzxjgn/0-F65-F8-E0-D77-D-464-C-B669-07-F0287-ABD7-C.png" width="50px" style="position: absolute; margin-left: 12vw; margin-top: 3vw">
+        <button class="soon"></button>
+      </RouterLink>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.back {
-  background-color: #444444;
-  border-radius: 50%;
-  border: none;
-  color: white;
-  width: 8vw;
-  height: 8vw;
-  float: right;
-  margin-top: 5vw;
-  margin-right: 2vw;
-}
-
 .task-board {
-  display: none;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
-  height: calc(100vh - 80px);
-  z-index: 1000;
+  height: 100vh;
   background: #212121;
+  overflow-y: auto; /* Добавляем прокрутку, если контент не помещается */
 }
 
-.task-board.open {
-  display: block;
-  animation: open 0.5s ease forwards;
-  bottom: -200px;
-}
-
-.task-board.close {
-  animation: close 0.5s ease forwards;
-  bottom: -200px;
-}
-
-@keyframes open {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(0);
-    bottom: 0;
-  }
-}
-
-@keyframes close {
-  from {
-    transform: translateY(0);
-    bottom: 0;
-  }
-  to {
-    transform: translateY(100%);
-    bottom: -200px;
-  }
+.leader-title h1 {
+  margin-top: 10px;
+  font-size: 24px;
 }
 
 .refs {
   margin-top: 15px;
   display: grid;
   gap: 20px;
+  padding: 0 20px; /* Добавляем отступы по бокам */
 }
 
 .refs li {
@@ -119,6 +100,30 @@
   margin-top: 10px;
   display: grid;
   gap: 20px;
+}
+
+.bar {
+  background-color: #2c2c2e;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.bar button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+}
+
+.bar img {
+  cursor: pointer;
 }
 </style>
 
