@@ -105,7 +105,7 @@
 .tasks {
   padding: 10px;
   margin-top: 30px;
-  padding-bottom: 80px; /* Увеличен отступ снизу */
+  padding-bottom: 50px; /* Увеличен отступ снизу */
   display: grid;
   gap: 5px;
 }
