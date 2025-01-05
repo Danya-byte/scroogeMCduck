@@ -141,7 +141,7 @@ export default {
       data: [
         {
           id: 1,
-          type: 'Channel',
+          type: 'Partners',
           reward: '+5 $FUCK',
         },
         {
@@ -151,7 +151,7 @@ export default {
         },
         {
           id: 3,
-          type: 'Transaction',
+          type: 'Channel',
           reward: '+10 $FUCK',
         },
       ],
