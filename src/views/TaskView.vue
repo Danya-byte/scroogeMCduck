@@ -1,8 +1,11 @@
 <template>
   <div class="content-container">
+    <!-- Картинка -->
     <center>
-      <img src="https://em-content.zobj.net/source/telegram/386/money-bag_1f4b0.webp" width="220px" style="margin-top: 50px;">
+      <img src="https://em-content.zobj.net/source/telegram/386/money-bag_1f4b0.webp" width="120px" style="margin-top: 20px;">
     </center>
+
+    <!-- Заголовок -->
     <h1 class="fixed-title">Task</h1>
 
     <!-- Фиксированные блоки с задачами -->
@@ -55,13 +58,13 @@ body {
 .content-container {
   height: 80vh; /* Задайте высоту контейнера, чтобы он занимал 80% высоты экрана */
   overflow-y: scroll; /* Включите вертикальную прокрутку */
-  padding-top: 200px; /* Добавьте отступ сверху, чтобы контент не перекрывался с заголовком и задачами */
+  padding-top: 200px; /* Добавьте отступ сверху, чтобы контент не перекрывался с заголовком и картинкой */
   padding-bottom: 100px; /* Добавьте отступ снизу, чтобы контент не перекрывался с нижней панелью */
 }
 
 .fixed-title {
   position: fixed;
-  top: 0;
+  top: 150px; /* Отступ от картинки */
   left: 0;
   width: 100%;
   background-color: #3b3b3b; /* Цвет фона заголовка */
@@ -75,7 +78,7 @@ body {
 
 .fixed-task-container {
   position: fixed;
-  top: 100px; /* Отступ от заголовка */
+  top: 200px; /* Отступ от заголовка */
   left: 0;
   width: 100%;
   z-index: 999; /* Убедитесь, что задачи находятся под заголовком, но над контентом */
