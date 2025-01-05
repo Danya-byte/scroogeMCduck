@@ -2,9 +2,9 @@
   <div class="task-board">
     <!-- Заголовок и картинка -->
     <div style="display: grid; align-items: center; justify-content: center; margin-top: 40px;">
-      <img width="85px" height="85px" src="https://em-content.zobj.net/source/telegram/386/sparkles_2728.webp" />
+      <img width="90px" height="90px" src="https://em-content.zobj.net/source/telegram/386/sparkles_2728.webp" />
     </div>
-    <div class="leader-title" style="margin-top: 20px;">
+    <div class="leader-title" style="margin-top: 40px;">
       <h1 style="color: #f0f0f0; text-align: center;">Tasks</h1>
     </div>
 
