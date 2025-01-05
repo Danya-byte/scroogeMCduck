@@ -217,7 +217,7 @@ export default {
     },
     performTransaction(item) {
       // Пример выполнения транзакции
-      console.log('Выполняется транзакция для:', item);
+      console.log('Transaction to:', item);
       // Здесь можно добавить вызов API или другую логику
       alert(`Транзакция выполнена! Награда: ${item.reward}`);
     },
