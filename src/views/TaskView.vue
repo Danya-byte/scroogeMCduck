@@ -42,7 +42,13 @@
             </div>
           </div>
           <div style="display: grid; align-items: center;">
-            <h1 class="start-button" @click="handleStart(item)">Start</h1>
+            <h1
+              class="start-button"
+              :class="{ disabled: item.completed }"
+              @click="!item.completed && handleStart(item)"
+            >
+              {{ item.completed ? 'Completed' : 'Start' }}
+            </h1>
           </div>
         </li>
       </ul>
@@ -68,8 +74,17 @@
     <div v-if="showModal" class="modal-overlay">
       <div class="modal">
         <div class="modal-content">
-          <img src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png" width="80px" height="80px" style="border-radius: 50%;">
-          <p style="margin-top: 10px; font-size: 16px; color: #fff;">Subscribe to the channel:</p>
+          <img
+            v-if="!taskCompleted"
+            src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png"
+            width="80px"
+            height="80px"
+            style="border-radius: 50%;"
+          />
+          <div v-else class="completed-overlay">
+            <img src="https://em-content.zobj.net/source/telegram/386/check-mark-button_2705.webp" width="80px" height="80px">
+          </div>
+          <p style="margin-top: 10px; font-size: 16px; color: #fff;">Подпишитесь на канал:</p>
           <a :href="currentLink" target="_blank" style="color: #3390ec; text-decoration: none;">{{ currentLink }}</a>
           <div style="display: flex; gap: 10px; margin-top: 20px;">
             <button class="modal-button check" @click="handleCheck">Check</button>
@@ -81,7 +96,7 @@
 
     <!-- Сообщение об успешном присоединении -->
     <div v-if="showSuccessMessage" class="success-message">
-      <p>Success Reward: {{ currentReward }}</p>
+      <p>Вы успешно присоединились! Награда: {{ currentReward }}</p>
     </div>
   </div>
 </template>
@@ -184,7 +199,13 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-.start-button:hover {
+.start-button.disabled {
+  background-color: #444444;
+  color: #777777;
+  cursor: not-allowed;
+}
+
+.start-button:hover:not(.disabled) {
   background-color: #3390ec;
   color: white;
 }
@@ -265,6 +286,16 @@
   90% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+/* Зеленая галочка и прозрачный зеленый фон */
+.completed-overlay {
+  background: rgba(76, 175, 80, 0.3); /* Прозрачный зеленый */
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
 
 <script>
@@ -277,30 +308,35 @@ export default {
           type: 'Channel',
           reward: '+5 $FUCK',
           link: 'https://t.me/Greenwoods_Community',
+          completed: false,
         },
         {
           id: 2,
           type: 'Transaction',
           reward: '+10 $FUCK',
           link: 'https://t.me/blum/app?startapp=memepadjetton_SCMD69_Stje1-ref_2rrmsdCh93',
+          completed: false,
         },
         {
           id: 3,
           type: 'Channel',
           reward: '+15 $FUCK',
           link: 'https://t.me/FreeScroogy69',
+          completed: false,
         },
         {
           id: 4,
           type: 'TEST',
           reward: '+15 $FUCK',
           link: 'https://example.com/test',
+          completed: false,
         },
       ],
       showModal: false, // Показывать ли модальное окно
       showSuccessMessage: false, // Показывать ли сообщение об успехе
       currentLink: '', // Текущая ссылка для модального окна
       currentReward: '', // Текущая награда для сообщения
+      taskCompleted: false, // Задача выполнена
     };
   },
   methods: {
@@ -342,15 +378,20 @@ export default {
     },
     handleCheck() {
       // Обработка нажатия на кнопку Check
-      this.showModal = false; // Закрываем модальное окно
+      this.taskCompleted = true; // Задача выполнена
       this.showSuccessMessage = true; // Показываем сообщение об успехе
       setTimeout(() => {
         this.showSuccessMessage = false;
       }, 3000);
+
+      // Помечаем задачу как выполненную
+      const task = this.data.find((t) => t.link === this.currentLink);
+      if (task) {
+        task.completed = true;
+      }
     },
     handleGo() {
       // Обработка нажатия на кнопку Go
-      this.showModal = false; // Закрываем модальное окно
       this.openTelegramLink(this.currentLink); // Открываем ссылку через Telegram WebApp
     },
   },
