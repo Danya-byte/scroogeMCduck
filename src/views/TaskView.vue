@@ -47,9 +47,9 @@ body {
 }
 
 .content-container {
-  height: calc(100vh - 100px); /* Учитываем высоту панели */
+  height: 80vh; /* Задайте высоту контейнера, чтобы он занимал 80% высоты экрана */
   overflow-y: scroll; /* Включите вертикальную прокрутку */
-  padding-bottom: 100px; /* Отступ снизу, чтобы контент не перекрывался с панелью */
+  padding-bottom: 100px; /* Добавьте отступ снизу, чтобы контент не перекрывался с нижней панелью */
 }
 
 .check {
@@ -67,11 +67,12 @@ body {
 .bar {
   background-color: #2c2c2e;
   bottom: 0;
-  width: 100%;
-  height: 80px; /* Высота панели */
-  position: fixed; /* Фиксированная позиция */
-  left: 0;
-  z-index: 1000; /* Убедитесь, что панель поверх контента */
+  width: 150%;
+  height: 9%;
+  border-radius: 25px;
+  margin-left: -40vw;
+  position: fixed;
+  overflow: hidden;
 }
 
 .task {
