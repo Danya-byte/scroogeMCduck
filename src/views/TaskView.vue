@@ -1,15 +1,15 @@
 <template>
   <div class="task-board">
     <!-- Заголовок и картинка -->
-    <div style="display: grid; align-items: center; justify-content: center; margin-top: 20px;">
-      <img width="65px" height="65px" src="https://em-content.zobj.net/source/telegram/386/sparkles_2728.webp" />
+    <div style="display: grid; align-items: center; justify-content: center; margin-top: 40px;"> <!-- Увеличено margin-top -->
+      <img width="85px" height="85px" src="https://em-content.zobj.net/source/telegram/386/sparkles_2728.webp" /> <!-- Увеличена картинка -->
     </div>
-    <div class="leader-title">
+    <div class="leader-title" style="margin-top: 20px;"> <!-- Увеличено margin-top -->
       <h1 style="color: #f0f0f0; text-align: center;">Tasks</h1>
     </div>
 
     <!-- Список задач -->
-    <section class="tasks">
+    <section class="tasks" style="margin-top: 30px;"> <!-- Увеличено margin-top -->
       <ul class="refs">
         <li v-for="(item) in data" :key="item.id">
           <div class="about">
@@ -97,7 +97,7 @@
 
 .tasks {
   padding: 10px;
-  margin-top: 10px;
+  margin-top: 30px; /* Увеличено margin-top */
   display: grid;
   gap: 20px;
 }
