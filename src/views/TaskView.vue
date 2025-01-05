@@ -19,7 +19,7 @@
                 style="border-radius: 50px;"
                 width="40px"
                 height="40px"
-                src="https://i.postimg.cc/mZnL0Gsf/2-C2-FD02-E-0-BB2-4-E91-A52-A-FAF4-BB160-FD3.png"
+                src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png"
               />
               <img
                 v-if="item.type == 'Transaction'"
@@ -27,6 +27,13 @@
                 width="40px"
                 height="40px"
                 src="https://i.postimg.cc/gj5cjhgV/CF8-B7771-2095-45-F1-AF17-ADE4-D690-A29-E.png.png"
+              />
+              <img
+                v-if="item.type == 'Partners'"
+                style="border-radius: 50px;"
+                width="40px"
+                height="40px"
+                src="https://i.postimg.cc/mZnL0Gsf/2-C2-FD02-E-0-BB2-4-E91-A52-A-FAF4-BB160-FD3.png"
               />
             </div>
             <div>
@@ -139,6 +146,11 @@ export default {
         },
         {
           id: 2,
+          type: 'Transaction',
+          reward: '+10 $FUCK',
+        },
+        {
+          id: 3,
           type: 'Transaction',
           reward: '+10 $FUCK',
         },
