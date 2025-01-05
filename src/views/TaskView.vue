@@ -90,7 +90,7 @@
 }
 
 .refs li {
-  padding: 0 5px 5px 5px; /* Уменьшен отступ снизу */
+  padding: 0 5px 15px 5px; /* Уменьшен отступ снизу */
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #181818;
