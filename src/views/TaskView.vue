@@ -38,7 +38,7 @@
             </div>
             <div>
               <h3 style="font-family: Quicksand; color: #fff; font-size: 20px;">{{ item.type }}</h3>
-              <p style="padding: 0; font-size: 20px; color: #aaaaaa; background: 0;">{{ item.reward }}</p>
+              <p style="padding: 0; font-size: 15px; color: #aaaaaa; background: 0;">{{ item.reward }}</p>
             </div>
           </div>
           <div style="display: grid; align-items: center;">
