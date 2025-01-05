@@ -140,7 +140,7 @@ export default {
         {
           id: 2,
           type: 'Transaction',
-          reward: '+1 $FUCK',
+          reward: '+10 $FUCK',
         },
       ],
     };
