@@ -50,16 +50,16 @@
 
     <!-- Нижняя панель навигации -->
     <div class="bar">
-      <RouterLink to="/task">
-        <img src="https://i.postimg.cc/kGxp19cP/5-CFA8313-0975-4-AE0-9986-E13-E9-B754-C11.png" width="40px" style="position: absolute; margin-left: 50vw; margin-top: 1vw">
+      <RouterLink to="/task" class="nav-item">
+        <img src="https://i.postimg.cc/kGxp19cP/5-CFA8313-0975-4-AE0-9986-E13-E9-B754-C11.png" width="40px">
         <button class="task"></button>
       </RouterLink>
-      <RouterLink to="/">
-        <img src="https://i.postimg.cc/66MKNfLs/D81-A5-CE1-57-CE-4417-A490-91-BCEF9-F5-B68.png" width="55px" style="position: absolute; margin-left: 8vw;">
+      <RouterLink to="/" class="nav-item">
+        <img src="https://i.postimg.cc/66MKNfLs/D81-A5-CE1-57-CE-4417-A490-91-BCEF9-F5-B68.png" width="55px">
         <button class="game"></button>
       </RouterLink>
-      <RouterLink to="/leader">
-        <img src="https://i.postimg.cc/fRPzxjgn/0-F65-F8-E0-D77-D-464-C-B669-07-F0287-ABD7-C.png" width="50px" style="position: absolute; margin-left: 12vw; margin-top: 3vw">
+      <RouterLink to="/leader" class="nav-item">
+        <img src="https://i.postimg.cc/fRPzxjgn/0-F65-F8-E0-D77-D-464-C-B669-07-F0287-ABD7-C.png" width="50px">
         <button class="soon"></button>
       </RouterLink>
     </div>
@@ -85,12 +85,12 @@
 .refs {
   margin-top: 15px;
   display: grid;
-  gap: 3px; /* Уменьшен отступ между заданиями */
+  gap: 3px;
   padding: 0 20px;
 }
 
 .refs li {
-  padding: 0 5px 15px 5px; /* Уменьшен отступ снизу */
+  padding: 0 5px 15px 5px;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #181818;
@@ -106,7 +106,7 @@
   padding: 10px;
   margin-top: 30px;
   display: grid;
-  gap: 5px; /* Уменьшен отступ между заданиями */
+  gap: 5px;
 }
 
 .bar {
@@ -114,12 +114,20 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 45px; /* Уменьшена высота нижней панели */
+  height: 45px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between; /* Равномерное распределение */
   align-items: center;
+  padding: 0 20px; /* Отступы по бокам */
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+}
+
+.bar .nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1; /* Равномерное распределение пространства */
 }
 
 .bar button {
