@@ -42,7 +42,7 @@
             </div>
           </div>
           <div style="display: grid; align-items: center;">
-            <h1 style="font-family: Quicksand; font-size: 18px; font-weight: 600; color: #3390ec;">Start</h1>
+            <h1 class="start-button">Start</h1> <!-- Добавлен класс для стилизации -->
           </div>
         </li>
       </ul>
@@ -144,6 +144,25 @@
 
 .bar img {
   cursor: pointer;
+}
+
+/* Стили для кнопки Start */
+.start-button {
+  font-family: Quicksand;
+  font-size: 18px;
+  font-weight: 600;
+  color: #3390ec;
+  border: 2px solid #3390ec; /* Обводка светло-синим цветом */
+  border-radius: 25px; /* Скругление углов */
+  padding: 8px 20px; /* Внутренние отступы */
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Плавные переходы */
+}
+
+.start-button:hover {
+  background-color: #3390ec; /* Цвет фона при наведении */
+  color: white; /* Цвет текста при наведении */
 }
 </style>
 
