@@ -17,27 +17,27 @@
               <img
                 v-if="item.type == 'Channel'"
                 style="border-radius: 50px;"
-                width="40px"
-                height="40px"
+                width="50px" <!-- Увеличена картинка -->
+                height="50px" <!-- Увеличена картинка -->
                 src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png"
               />
               <img
                 v-if="item.type == 'Transaction'"
                 style="border-radius: 50px;"
-                width="40px"
-                height="40px"
+                width="50px" <!-- Увеличена картинка -->
+                height="50px" <!-- Увеличена картинка -->
                 src="https://i.postimg.cc/gj5cjhgV/CF8-B7771-2095-45-F1-AF17-ADE4-D690-A29-E.png.png"
               />
               <img
                 v-if="item.type == 'Partners'"
                 style="border-radius: 50px;"
-                width="40px"
-                height="40px"
+                width="50px" <!-- Увеличена картинка -->
+                height="50px" <!-- Увеличена картинка -->
                 src="https://i.postimg.cc/mZnL0Gsf/2-C2-FD02-E-0-BB2-4-E91-A52-A-FAF4-BB160-FD3.png"
               />
             </div>
             <div>
-              <h3 style="font-family: Quicksand; color: #fff;">{{ item.type }}</h3>
+              <h3 style="font-family: Quicksand; color: #fff; font-size: 20px;">{{ item.type }}</h3> <!-- Увеличен шрифт -->
               <p style="padding: 0; font-size: 14px; color: #aaaaaa; background: 0;">{{ item.reward }}</p>
             </div>
           </div>
@@ -94,6 +94,9 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #181818;
+  border: 1px solid #444444; /* Обводка задания */
+  border-radius: 10px; /* Скругление углов */
+  padding: 10px; /* Внутренний отступ */
 }
 
 .about {
@@ -105,7 +108,7 @@
 .tasks {
   padding: 10px;
   margin-top: 30px;
-  padding-bottom: 30px; /* Увеличен отступ снизу */
+  padding-bottom: 30px;
   display: grid;
   gap: 5px;
 }
