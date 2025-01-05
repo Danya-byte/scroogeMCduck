@@ -199,15 +199,16 @@
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end; /* Окно снизу */
   z-index: 1000;
 }
 
 .modal {
   background: #2c2c2e;
-  border-radius: 15px;
+  border-radius: 20px 20px 0 0; /* Скругленные углы сверху */
   padding: 20px;
-  width: 300px;
+  width: 100%;
+  max-width: 500px;
   text-align: center;
 }
 
@@ -350,7 +351,7 @@ export default {
     handleGo() {
       // Обработка нажатия на кнопку Go
       this.showModal = false; // Закрываем модальное окно
-      window.open(this.currentLink, '_blank'); // Открываем ссылку в новой вкладке
+      this.openTelegramLink(this.currentLink); // Открываем ссылку через Telegram WebApp
     },
   },
 };
