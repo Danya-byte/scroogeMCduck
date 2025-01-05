@@ -1,15 +1,15 @@
 <template>
   <div class="task-board">
     <!-- Заголовок и картинка -->
-    <div style="display: grid; align-items: center; justify-content: center; margin-top: 40px;"> <!-- Увеличено margin-top -->
-      <img width="85px" height="85px" src="https://em-content.zobj.net/source/telegram/386/sparkles_2728.webp" /> <!-- Увеличена картинка -->
+    <div style="display: grid; align-items: center; justify-content: center; margin-top: 40px;">
+      <img width="85px" height="85px" src="https://em-content.zobj.net/source/telegram/386/sparkles_2728.webp" />
     </div>
-    <div class="leader-title" style="margin-top: 20px;"> <!-- Увеличено margin-top -->
+    <div class="leader-title" style="margin-top: 20px;">
       <h1 style="color: #f0f0f0; text-align: center;">Tasks</h1>
     </div>
 
     <!-- Список задач -->
-    <section class="tasks" style="margin-top: 30px;"> <!-- Увеличено margin-top -->
+    <section class="tasks" style="margin-top: 30px;">
       <ul class="refs">
         <li v-for="(item) in data" :key="item.id">
           <div class="about">
@@ -74,7 +74,7 @@
   width: 100vw;
   height: 100vh;
   background: #212121;
-  overflow-y: auto; /* Добавляем прокрутку, если контент не помещается */
+  overflow-y: auto;
 }
 
 .leader-title h1 {
@@ -85,12 +85,12 @@
 .refs {
   margin-top: 15px;
   display: grid;
-  gap: 20px;
-  padding: 0 20px; /* Добавляем отступы по бокам */
+  gap: 10px; /* Уменьшен отступ между заданиями */
+  padding: 0 20px;
 }
 
 .refs li {
-  padding: 0 5px 20px 5px;
+  padding: 0 5px 15px 5px; /* Уменьшен отступ снизу */
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #181818;
@@ -104,9 +104,9 @@
 
 .tasks {
   padding: 10px;
-  margin-top: 30px; /* Увеличено margin-top */
+  margin-top: 30px;
   display: grid;
-  gap: 20px;
+  gap: 10px; /* Уменьшен отступ между заданиями */
 }
 
 .bar {
@@ -114,7 +114,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 80px;
+  height: 60px; /* Уменьшена высота нижней панели */
   display: flex;
   justify-content: space-around;
   align-items: center;
