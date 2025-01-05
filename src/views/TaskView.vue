@@ -96,7 +96,7 @@
 
     <!-- Сообщение об успешном присоединении -->
     <div v-if="showSuccessMessage" class="success-message">
-      <p>Вы успешно присоединились! Награда: {{ currentReward }}</p>
+      <p>Reward:{{ currentReward }}</p>
     </div>
   </div>
 </template>
