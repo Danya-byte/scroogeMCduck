@@ -1,152 +1,147 @@
 <template>
-  <div class="content-container">
-    <!-- Картинка -->
-    <center>
-      <img src="https://em-content.zobj.net/source/telegram/386/money-bag_1f4b0.webp" width="120px" style="margin-top: 10px;"> <!-- Уменьшил margin-top -->
-    </center>
-
-    <!-- Заголовок -->
-    <h1 class="fixed-title">Task</h1>
-
-    <!-- Фиксированные блоки с задачами -->
-    <div class="fixed-task-container">
-      <div class="backtask">
-        <img src="https://i.postimg.cc/mZnL0Gsf/2-C2-FD02-E-0-BB2-4-E91-A52-A-FAF4-BB160-FD3.png" width="50px" style="margin-top: 10px; margin-left: 5px;">
-        <h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Check Channel</h3>
-        <a href="https://t.me/Greenwoods_Community" target="_blank"><button class="check">Check</button></a>
-      </div>
-      <div class="backtask" style="margin-top: 10px;">
-        <img src="https://i.postimg.cc/gj5cjhgV/CF8-B7771-2095-45-F1-AF17-ADE4-D690-A29-E.png" width="50px" style="margin-top: 10px; margin-left: 5px;">
-        <h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Check Channel</h3>
-        <a href="https://t.me/FreeScroogy69" target="_blank"><button class="check">Check</button></a>
-      </div>
-      <div class="backtask" style="margin-top: 10px;">
-        <img src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png" width="50px" style="margin-top: 10px; margin-left: 5px;">
-        <h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Buy Token</h3>
-        <a href="https://t.me/blum/app?startapp=memepadjetton_SCMD69_Stje1-ref_2rrmsdCh93" target="_blank"><button class="check">Buy</button></a>
-      </div>
+    <div class="task-board open">
+        <div style="display: grid; align-items: center; justify-content: center;">
+            <img width="65px" height="65px" src="https://em-content.zobj.net/source/telegram/386/sparkles_2728.webp" />
+        </div>
+        <div class="leader-title">
+            <h1 style="color: #f0f0f0; text-align: center;">Tasks</h1>
+        </div>
+        <section class="tasks">
+        <ul class="refs">
+            <li v-for="(item) in data" :key="item.id">
+                <div class="about">
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <img v-if="item.type == 'Channel'" style="border-radius: 50px;" width="40px" height="40px" src="../../assets/telegramlogo.jpeg" @click="close" />
+                        <img v-if="item.type == 'Transaction'" style="border-radius: 50px;" width="40px" height="40px" src="../../assets/telegramlogo.jpeg" @click="close" />
+                    </div>
+                    <div>
+                        <h3 style="font-family: Quicksand; color: #fff;">{{ item.type }}</h3>
+                        <p style="padding: 0; font-size: 14px; color: #aaaaaa; background: 0;">{{ item.reward }}</p>
+                    </div>
+                </div>
+                <div style="display: grid; align-items: center;">
+                    <h1 style="font-family: Quicksand; font-size: 18px; font-weight: 600; color: #3390ec;">Start</h1>
+                </div>
+            </li>
+        </ul>
+        </section>
     </div>
-  </div>
-
-  <!-- Нижняя панель -->
-  <div class="bar">
-    <RouterLink to="/task">
-      <img src="https://i.postimg.cc/MKmL16Hy/3164-B3-A9-E06-A-42-A6-82-DC-1-AFA9-B7095-E8.png" width="40px" style="position: absolute; margin-left: 50vw; margin-top: 1vw">
-      <button class="task"></button>
-    </RouterLink>
-    <RouterLink to="/">
-      <img src="https://i.postimg.cc/66MKNfLs/D81-A5-CE1-57-CE-4417-A490-91-BCEF9-F5-B68.png" width="55px" style="position: absolute; margin-left: 8vw;">
-      <button class="game"></button>
-    </RouterLink>
-    <RouterLink to="/leader">
-      <img src="https://i.postimg.cc/tCz2cBhP/D384540-F-C585-455-C-AAB5-D10-FA58774-B2.png" width="50px" style="position: absolute; margin-left: 12vw; margin-top: 3vw">
-      <button class="soon"></button>
-    </RouterLink>
-  </div>
 </template>
 
 <style scoped>
-body {
-  font-family: Geologica;
-  background-color: #3b3b3b;
-  color: white;
-  touch-action: none;
-  overflow-y: scroll;
-  margin: 0; /* Убираем отступы по умолчанию */
-}
-
-.content-container {
-  height: 80vh; /* Задайте высоту контейнера, чтобы он занимал 80% высоты экрана */
-  overflow-y: scroll; /* Включите вертикальную прокрутку */
-  padding-top: 250px; /* Увеличил отступ сверху, чтобы контент не перекрывался с заголовком и картинкой */
-  padding-bottom: 100px; /* Добавьте отступ снизу, чтобы контент не перекрывался с нижней панелью */
-}
-
-.fixed-title {
-  position: fixed;
-  top: 120px; /* Поднял заголовок выше */
-  left: 0;
-  width: 100%;
-  background-color: #3b3b3b; /* Цвет фона заголовка */
-  z-index: 1000; /* Убедитесь, что заголовок находится поверх других элементов */
-  padding: 20px 0;
-  text-align: center;
-  color: white;
-  font-family: Geologica;
-  margin: 0; /* Убираем отступы по умолчанию */
-}
-
-.fixed-task-container {
-  position: fixed;
-  top: 180px; /* Опустил задачи ниже */
-  left: 0;
-  width: 100%;
-  z-index: 999; /* Убедитесь, что задачи находятся под заголовком, но над контентом */
-  background-color: #3b3b3b; /* Цвет фона, чтобы задачи не сливались с контентом */
-  padding: 10px 0;
-}
-
-.check {
-  background-color: rgb(105, 175, 237);
+.back {
+  background-color: #444444;
+  border-radius: 50%;
   border: none;
-  border-radius: 25px;
   color: white;
-  width: 60px;
-  height: 30px;
-  position: absolute;
-  margin-left: 65vw;
-  margin-top: 20px;
+  width: 8vw;
+  height: 8vw;
+  float: right;
+  margin-top: 5vw;
+  margin-right: 2vw;
+}
+.task-board {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    z-index: 1000;
+    background: #212121;
 }
 
-.bar {
-  background-color: #2c2c2e;
-  bottom: 0;
-  width: 150%;
-  height: 9%;
-  border-radius: 25px;
-  margin-left: -40vw;
-  position: fixed;
-  overflow: hidden;
-  z-index: 1000; /* Убедитесь, что панель находится поверх других элементов */
+.task-board.open {
+    display: block;
+    animation: open 0.5s ease forwards;
+    bottom: -200px;
 }
 
-.task {
-  background-color: #2c2c2e;
-  width: 33vw;
-  height: 105px;
-  border: none;
-  font-family: Geologica;
-  color: white;
-  margin-left: 38vw;
-  color: rgb(17, 117, 193);
+.task-board.close {
+    animation: close 0.5s ease forwards;
+    bottom: -200px;
 }
 
-.game {
-  background-color: #2c2c2e;
-  width: 33vw;
-  height: 100px;
-  border: none;
-  font-family: Geologica;
-  color: white;
-  margin-left: -2vw;
-  color: rgb(82, 82, 82);
+@keyframes open {
+0% {
+    transform: translateY(100%);
+}
+100% {
+    transform: translateY(0);
+    bottom: 0;
+}
 }
 
-.soon {
-  background-color: #2c2c2e;
-  width: 38vw;
-  height: 105px;
-  border: none;
-  font-family: Geologica;
-  color: white;
-  margin-left: -1vw;
-  color: rgb(82, 82, 82);
+@keyframes close {
+    from {
+        transform: translateY(0);
+        bottom: 0;
+    }
+    to {
+        transform: translateY(100%);
+        bottom: -200px;
+    }
 }
 
-.backtask {
-  background-color: #2c2c2e;
-  height: 70px;
-  border-radius: 15px;
-  margin-top: 10px; /* Добавьте отступ между блоками */
+.refs {
+    margin-top: 15px;
+    display: grid;
+    gap: 20px;
 }
+
+.refs li {
+    padding: 0 5px 20px 5px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #181818;
+}
+
+.about {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: auto;
+    gap: 10px;
+}
+
+.tasks {
+    padding: 10px;
+    margin-top: 10px;
+    display: grid;
+    gap: 20px;
+}
+
 </style>
+
+<script>
+export default {
+    data() {
+        return {
+            data: [
+                {
+                    id: 1,
+                    type: 'Channel',
+                    reward: '+500 EWE'
+                },
+                {
+                    id: 2,
+                    type: 'Channel',
+                    reward: '+1000 EWI'
+                }
+            ]
+        }
+    },
+    methods: {
+        close() {
+            document.querySelector('.leader-board').classList.add('close')
+            setTimeout(() => {
+                document.querySelector('#app').removeChild(document.querySelector('.leader-board'))
+            }, 500)
+        }
+    }
+}
+</script>
