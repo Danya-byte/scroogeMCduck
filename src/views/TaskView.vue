@@ -9,7 +9,7 @@
     </div>
 
     <!-- Список задач -->
-    <section class="tasks" style="margin-top: 30px;">
+    <section class="tasks" style="margin-top: 40px;">
       <ul class="refs">
         <li v-for="(item) in data" :key="item.id">
           <div class="about">
