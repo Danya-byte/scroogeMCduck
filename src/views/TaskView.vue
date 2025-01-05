@@ -154,6 +154,11 @@ export default {
           type: 'Channel',
           reward: '+15 $FUCK',
         },
+        {
+          id: 4,
+          type: 'TEST',
+          reward: '+15 $FUCK',
+        },
       ],
     };
   },
