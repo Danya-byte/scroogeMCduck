@@ -106,7 +106,7 @@
   padding: 10px;
   margin-top: 30px;
   display: grid;
-  gap: 10px; /* Уменьшен отступ между заданиями */
+  gap: 5px; /* Уменьшен отступ между заданиями */
 }
 
 .bar {
@@ -114,7 +114,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 60px; /* Уменьшена высота нижней панели */
+  height: 50px; /* Уменьшена высота нижней панели */
   display: flex;
   justify-content: space-around;
   align-items: center;
