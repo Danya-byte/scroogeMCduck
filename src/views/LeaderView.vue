@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody id="leaderboard-body">
-          <tr v-for="(user, index) in sortedCounts" :key="index">     
+          <tr v-for="(user, index) in sortedCounts" :key="index">
             <td>{{ user[0] }}</td>
             <td>{{ user[1].count }}</td>
           </tr>
@@ -34,12 +34,13 @@
       </RouterLink>
     </div>
   </template>
-  
+
   <style scoped>
     body {
       font-family: Geologica;
       color: white;
-      touch-action: none; 
+      touch-action: none;
+      overflow-y: scroll;
     }
     #leaderboard {
       width: 100%;
@@ -104,11 +105,11 @@
       overflow-y: scroll;
     }
   </style>
-  
+
   <script>
   import { initializeApp } from "firebase/app";
   import { getDatabase, ref, onValue } from "firebase/database";
-  
+
   const firebaseConfig = {
     apiKey: "AIzaSyBhTL7JcmGtdwPpJyKkwMRoIEOIU17ZxUk",
     authDomain: "tapalka-c9556.firebaseapp.com",
@@ -119,10 +120,10 @@
     appId: "1:386428968826:web:de56837a0bbc2cf27940c3",
     measurementId: "G-YENX5XCT8J"
   };
-  
+
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
-  
+
   export default {
     data() {
       return {

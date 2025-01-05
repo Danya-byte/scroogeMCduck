@@ -1,21 +1,21 @@
 <template>
     <center>
-    <img src="https://em-content.zobj.net/source/telegram/386/money-bag_1f4b0.webp" width="250px" style="margin-top: 50px;">
+    <img src="https://em-content.zobj.net/source/telegram/386/money-bag_1f4b0.webp" width="220px" style="margin-top: 50px;">
     </center>
     <h1 style="color: white; font-family: Geologica;">Task</h1>
-    <div>
-    <img src="https://i.postimg.cc/mZnL0Gsf/2-C2-FD02-E-0-BB2-4-E91-A52-A-FAF4-BB160-FD3.png" width="50px"><h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Check Channel</h3>
+    <div class="backtask">
+    <img src="https://i.postimg.cc/mZnL0Gsf/2-C2-FD02-E-0-BB2-4-E91-A52-A-FAF4-BB160-FD3.png" width="50px" style="margin-top: 10px; margin-left: 5px;"><h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Check Channel</h3>
     <a href="https://t.me/Greenwoods_Community" target="_blank"><button class="check">Check</button></a>
     </div>
-    <div style="margin-top: 10px;">
-    <img src="https://i.postimg.cc/gj5cjhgV/CF8-B7771-2095-45-F1-AF17-ADE4-D690-A29-E.png" width="50px"><h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Check Channel</h3>
+    <div class="backtask" style="margin-top: 10px;">
+    <img src="https://i.postimg.cc/gj5cjhgV/CF8-B7771-2095-45-F1-AF17-ADE4-D690-A29-E.png" width="50px" style="margin-top: 10px; margin-left: 5px;"><h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Check Channel</h3>
     <a href="https://t.me/FreeScroogy69" target="_blank"><button class="check">Check</button></a>
     </div>
-    <div style="margin-top: 10px;">
-    <img src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png" width="50px"><h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Buy Token</h3>
+    <div class="backtask" style="margin-top: 10px;">
+    <img src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png" width="50px" style="margin-top: 10px; margin-left: 5px;"><h3 style="position: absolute; margin-top: -40px; margin-left: 70px; color: white; font-family: Geologica;">Buy Token</h3>
     <a href="https://t.me/blum/app?startapp=memepadjetton_SCMD69_Stje1-ref_2rrmsdCh93" target="_blank"><button class="check">Buy</button></a>
     </div>
-    
+
     <div class="bar">
               <RouterLink to="/task">
                 <img src="https://i.postimg.cc/MKmL16Hy/3164-B3-A9-E06-A-42-A6-82-DC-1-AFA9-B7095-E8.png" width="40px" style="position: absolute; margin-left: 50vw; margin-top: 1vw">
@@ -31,14 +31,14 @@
               </RouterLink>
     </div>
     </template>
-    
+
     <style scoped>
     body {
           font-family:  Geologica;
           background-color: #3b3b3b;
           color: white;
           touch-action: none;
-          overflow-y: scroll; 
+          overflow-y: scroll;
     }
     .check {
         background-color: rgb(105, 175, 237);
@@ -47,9 +47,9 @@
         color: white;
         width: 60px;
         height: 30px;
-        position: absolute; 
-        margin-left: 65vw; 
-        margin-top: 12px;
+        position: absolute;
+        margin-left: 65vw;
+        margin-top: 20px;
     }
      .bar {
           background-color: #2c2c2e;
@@ -93,5 +93,10 @@
       }
       .divka {
         overflow-y: scroll;
+      }
+      .backtask {
+        background-color: #2c2c2e;
+        height: 70px;
+        border-radius: 15px;
       }
     </style>

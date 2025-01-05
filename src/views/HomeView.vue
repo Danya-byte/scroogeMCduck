@@ -4,7 +4,7 @@
     <img src="https://i.postimg.cc/52sSDZxK/IMG-2627.jpg" width="40px" style="margin-top: 15px; margin-left: 10px; border-radius: 15px;">
     <p id="username" style="color: white; font-family: Geologica; position: absolute; margin-top: -35px; margin-left: 60px;">@{{ user }}</p>
   </div>
-  <div style="text-align: center; margin-top: 90px;">
+  <div style="text-align: center; margin-top: 50px;">
       <span class="score" id="count"><b>{{ likeCount }}</b></span><br>
       <button class="like" id="like" @click="tap"><img class="tap" src="https://i.postimg.cc/Rh1cdYsR/724-EDD19-EB0-C-4368-9-C2-F-4938769-DF5-FD.png"></button>
   </div>
@@ -29,7 +29,6 @@
   body {
       background-color: #1c1c1d;
       touch-action: none;
-      overflow-y: scroll;
   }
   .score {
       font-family: Geologica;
@@ -52,7 +51,7 @@
       background-color: #2c2c2e;
       bottom: 0;
       width: 150%;
-      height: 9%;
+      height: 10%;
       border-radius: 25px;
       margin-left: -40vw;
       position: fixed;
@@ -151,10 +150,10 @@ onMounted(fetchInitialLikeCount);
 
 <script>
 export default {
-   data() {
-      return {
-          user: window.Telegram.WebApp.initDataUnsafe.user.username
-       }
-   }
+  data() {
+     return {
+         user: window.Telegram.WebApp.initDataUnsafe.user.username
+      }
+  }
 }
 </script>
