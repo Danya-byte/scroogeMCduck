@@ -38,11 +38,11 @@
             </div>
             <div>
               <h3 style="font-family: Quicksand; color: #fff; font-size: 20px;">{{ item.type }}</h3>
-              <p style="padding: 0; font-size: 14px; color: #aaaaaa; background: 0;">{{ item.reward }}</p>
+              <p style="padding: 0; font-size: 20px; color: #aaaaaa; background: 0;">{{ item.reward }}</p>
             </div>
           </div>
           <div style="display: grid; align-items: center;">
-            <h1 class="start-button">Start</h1> <!-- Добавлен класс для стилизации -->
+            <h1 class="start-button" @click="handleStart(item)">Start</h1> <!-- Обработчик события -->
           </div>
         </li>
       </ul>
@@ -152,17 +152,17 @@
   font-size: 18px;
   font-weight: 600;
   color: #3390ec;
-  border: 2px solid #3390ec; /* Обводка светло-синим цветом */
-  border-radius: 25px; /* Скругление углов */
-  padding: 8px 20px; /* Внутренние отступы */
+  border: 2px solid #3390ec;
+  border-radius: 25px;
+  padding: 8px 20px;
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* Плавные переходы */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .start-button:hover {
-  background-color: #3390ec; /* Цвет фона при наведении */
-  color: white; /* Цвет текста при наведении */
+  background-color: #3390ec;
+  color: white;
 }
 </style>
 
@@ -175,24 +175,52 @@ export default {
           id: 1,
           type: 'Partners',
           reward: '+5 $FUCK',
+          link: 'https://example.com/partners', // Пример ссылки для партнеров
         },
         {
           id: 2,
           type: 'Transaction',
           reward: '+10 $FUCK',
+          link: 'https://example.com/transaction', // Пример ссылки для транзакции
         },
         {
           id: 3,
           type: 'Channel',
           reward: '+15 $FUCK',
+          link: 'https://t.me/your_channel', // Пример ссылки на канал
         },
         {
           id: 4,
           type: 'TEST',
           reward: '+15 $FUCK',
+          link: 'https://example.com/test', // Пример ссылки для теста
         },
       ],
     };
+  },
+  methods: {
+    handleStart(item) {
+      // Обработка клика в зависимости от типа задачи
+      switch (item.type) {
+        case 'Channel':
+          window.open(item.link, '_blank'); // Открыть канал в новой вкладке
+          break;
+        case 'Transaction':
+          this.performTransaction(item); // Выполнить транзакцию
+          break;
+        case 'Partners':
+          window.open(item.link, '_blank'); // Перейти на страницу партнера
+          break;
+        default:
+          console.log('Неизвестный тип задачи:', item.type);
+      }
+    },
+    performTransaction(item) {
+      // Пример выполнения транзакции
+      console.log('Выполняется транзакция для:', item);
+      // Здесь можно добавить вызов API или другую логику
+      alert(`Транзакция выполнена! Награда: ${item.reward}`);
+    },
   },
 };
 </script>
