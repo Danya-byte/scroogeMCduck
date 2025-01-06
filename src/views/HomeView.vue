@@ -10,11 +10,21 @@
         @{{ user }}
       </p>
     </div>
-    <div style="text-align: center; margin-top: 50px;">
+    <div style="text-align: center; margin-top: 30px;">
       <span class="score" id="count"><b>{{ likeCount }}</b></span><br />
-      <button class="like" id="like" @click="tap">
-        <img class="tap" src="https://i.postimg.cc/Rh1cdYsR/724-EDD19-EB0-C-4368-9-C2-F-4938769-DF5-FD.png" />
-      </button>
+      <!-- Контейнер для монетки и анимации +1 -->
+      <div class="coin-container">
+        <button class="like" id="like" @click="tap">
+          <img
+            class="tap"
+            :class="{ shake: isShaking }"
+            src="https://i.postimg.cc/Rh1cdYsR/724-EDD19-EB0-C-4368-9-C2-F-4938769-DF5-FD.png"
+          />
+        </button>
+        <transition name="fade">
+          <span v-if="showPlusOne" class="plus-one">+1</span>
+        </transition>
+      </div>
     </div>
 
     <!-- Нижняя панель навигации -->
@@ -50,12 +60,13 @@ body {
   background-color: #1c1c1d;
   border: none;
 }
+.tap {
+  width: 250px; /* Уменьшили размер монетки */
+  background-color: #1c1c1d;
+  transition: transform 0.1s ease-in-out;
+}
 .tap:active {
   transform: translateY(5px);
-}
-.tap {
-  width: 320px;
-  background-color: #1c1c1d;
 }
 .head {
   background-color: #252525;
@@ -65,20 +76,81 @@ body {
   height: 70px;
 }
 
+/* Контейнер для монетки и анимации +1 */
+.coin-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 20px; /* Подняли монетку выше */
+}
+
+/* Анимация тряски монетки */
+.shake {
+  animation: shake 0.2s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+/* Анимация +1 */
+.plus-one {
+  position: absolute;
+  top: -30px; /* Позиция над монеткой */
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: Geologica;
+  font-size: 24px;
+  color: #ffd700; /* Золотой цвет */
+  animation: floatUp 0.5s ease-in-out;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50px);
+  }
+}
+
+/* Анимация исчезновения +1 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
 /* Стили для нижней панели */
 .bar {
   background-color: #2c2c2e;
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 60px; /* Увеличим высоту для более округлого вида */
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  border-top-left-radius: 30px; /* Увеличим скругление */
-  border-top-right-radius: 30px; /* Увеличим скругление */
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Добавим тень для объема */
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .bar .nav-item {
@@ -89,7 +161,7 @@ body {
 }
 
 .bar .nav-item.active img {
-  filter: brightness(1.5); /* Подсветка активной иконки */
+  filter: brightness(1.5);
 }
 
 .bar button {
@@ -123,28 +195,44 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const likeCount = ref(0);
+const isShaking = ref(false); // Для анимации тряски
+const showPlusOne = ref(false); // Для отображения +1
 
 const getUser = () => {
-  return window.Telegram.WebApp.initDataUnsafe.user.username; // Используем реальное имя пользователя
+  return window.Telegram.WebApp.initDataUnsafe.user.username;
 };
 
 const tap = async () => {
-  const username = getUser(); // Получаем имя пользователя
-  const countsRef = dbRef(db, `counts/${username}`); // Используем его как ключ
+  const username = getUser();
+  const countsRef = dbRef(db, `counts/${username}`);
   try {
     const snapshot = await get(countsRef);
     let tap = snapshot.exists() ? snapshot.val().count : 0;
     tap++;
     likeCount.value = tap;
     await set(countsRef, { count: tap });
+
+    // Анимация тряски и +1
+    isShaking.value = true;
+    showPlusOne.value = true;
+
+    // Сбрасываем анимацию тряски через 200 мс
+    setTimeout(() => {
+      isShaking.value = false;
+    }, 200);
+
+    // Скрываем +1 через 500 мс
+    setTimeout(() => {
+      showPlusOne.value = false;
+    }, 500);
   } catch (error) {
     console.error('Error updating taps:', error);
   }
 };
 
 const fetchInitialLikeCount = async () => {
-  const username = getUser(); // Получаем имя пользователя
-  const countsRef = dbRef(db, `counts/${username}`); // Используем его как ключ
+  const username = getUser();
+  const countsRef = dbRef(db, `counts/${username}`);
   try {
     const snapshot = await get(countsRef);
     if (snapshot.exists()) {
@@ -156,7 +244,7 @@ const fetchInitialLikeCount = async () => {
 };
 
 onMounted(() => {
-  fetchInitialLikeCount(); // Загружаем счетчик кликов при монтировании компонента
+  fetchInitialLikeCount();
 });
 </script>
 
@@ -164,7 +252,7 @@ onMounted(() => {
 export default {
   data() {
     return {
-      user: window.Telegram.WebApp.initDataUnsafe.user.username, // Имя пользователя для отображения
+      user: window.Telegram.WebApp.initDataUnsafe.user.username,
     };
   },
 };
