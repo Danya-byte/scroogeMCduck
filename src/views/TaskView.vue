@@ -50,7 +50,6 @@
               {{ item.completed ? 'Completed' : 'Start' }}
             </h1>
           </div>
-          <div v-if="item.completed" class="fireworks"></div>
         </li>
       </ul>
     </section>
@@ -93,11 +92,14 @@
 
     <!-- Сообщение об успешном присоединении -->
     <div v-if="showSuccessMessage" class="success-message-container">
-      <div class="fireworks left"></div>
       <div class="success-message">
         <p>Reward: {{ currentReward }}</p>
       </div>
-      <div class="fireworks right"></div>
+    </div>
+
+    <!-- Анимация салюта поверх всего экрана -->
+    <div v-if="showFireworks" class="fireworks-overlay">
+      <div class="fireworks"></div>
     </div>
   </div>
 </template>
@@ -149,9 +151,9 @@
   padding-bottom: 30px;
   display: grid;
   gap: 5px;
-  max-width: 800px; /* Ограничиваем максимальную ширину контейнера задач */
-  margin-left: auto; /* Центрируем контейнер */
-  margin-right: auto; /* Центрируем контейнер */
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .bar {
@@ -159,13 +161,14 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 45px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  border-top-left-radius: 20px; /* Скругление слева */
-  border-top-right-radius: 20px; /* Скругление справа */
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .bar .nav-item {
@@ -176,7 +179,7 @@
 }
 
 .bar .nav-item.active img {
-  filter: brightness(1.5); /* Подсветка активной иконки */
+  filter: brightness(1.5);
 }
 
 .bar button {
@@ -190,7 +193,6 @@
   cursor: pointer;
 }
 
-/* Стили для кнопки Start */
 .start-button {
   font-family: Quicksand;
   font-size: 18px;
@@ -215,7 +217,6 @@
   color: white;
 }
 
-/* Модальное окно */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -225,13 +226,13 @@
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
-  align-items: flex-end; /* Окно снизу */
+  align-items: flex-end;
   z-index: 1000;
 }
 
 .modal {
   background: #2c2c2e;
-  border-radius: 20px 20px 0 0; /* Скругленные углы сверху */
+  border-radius: 20px 20px 0 0;
   padding: 20px;
   width: 100%;
   max-width: 500px;
@@ -271,7 +272,6 @@
   background-color: #555555;
 }
 
-/* Сообщение об успешном присоединении */
 .success-message-container {
   position: fixed;
   top: 50%;
@@ -289,8 +289,6 @@
   padding: 20px;
   border-radius: 10px;
   animation: fadeInOut 3s ease-in-out;
-  position: relative;
-  z-index: 2;
 }
 
 @keyframes fadeInOut {
@@ -300,23 +298,25 @@
   100% { opacity: 0; }
 }
 
-/* Анимация салюта */
-.fireworks {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100px;
-  height: 100px;
-  z-index: 1;
+/* Анимация салюта поверх всего экрана */
+.fireworks-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1001;
   pointer-events: none;
 }
 
-.fireworks.left {
-  left: -120px; /* Салют слева от сообщения */
-}
-
-.fireworks.right {
-  right: -120px; /* Салют справа от сообщения */
+.fireworks {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  animation: fireworksAnimation 1.5s ease-in-out;
 }
 
 .fireworks::before,
@@ -327,70 +327,31 @@
   height: 20px;
   background: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/sparkles_2728.png') no-repeat center center;
   background-size: contain;
-  animation: fireworksAnimation 1s ease-in-out;
+  animation: fireworksParticles 1s ease-in-out infinite;
 }
 
-.fireworks.left::before {
+.fireworks::before {
   top: 0;
   left: 0;
   animation-delay: 0s;
 }
 
-.fireworks.left::after {
+.fireworks::after {
   top: 50%;
   left: 50%;
   animation-delay: 0.5s;
 }
 
-.fireworks.right::before {
-  top: 0;
-  right: 0;
-  animation-delay: 0s;
-}
-
-.fireworks.right::after {
-  top: 50%;
-  right: 50%;
-  animation-delay: 0.5s;
-}
-
 @keyframes fireworksAnimation {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  50% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+}
+
+@keyframes fireworksParticles {
   0% { transform: translateY(0) scale(0); opacity: 0; }
   50% { transform: translateY(-50px) scale(1); opacity: 1; }
   100% { transform: translateY(-100px) scale(0); opacity: 0; }
-}
-
-/* Зеленая галочка и прозрачный зеленый фон */
-.completed-overlay {
-  background: rgba(76, 175, 80, 0.3); /* Прозрачный зеленый */
-  border-radius: 50%;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Стили для завершенных задач */
-.completed-task {
-  position: relative;
-  overflow: hidden;
-}
-
-.completed-task::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(76, 175, 80, 0.3); /* Прозрачный зеленый */
-  z-index: 1;
-}
-
-.completed-task .start-button {
-  background-color: #4CAF50; /* Зеленый цвет для кнопки */
-  color: white;
-  cursor: not-allowed;
 }
 </style>
 
@@ -428,35 +389,34 @@ export default {
           completed: false,
         },
       ],
-      showModal: false, // Показывать ли модальное окно
-      showSuccessMessage: false, // Показывать ли сообщение об успехе
-      currentLink: '', // Текущая ссылка для модального окна
-      currentReward: '', // Текущая награда для сообщения
-      taskCompleted: false, // Задача выполнена
-      currentTaskImage: '', // Переменная для хранения текущей картинки
+      showModal: false,
+      showSuccessMessage: false,
+      currentLink: '',
+      currentReward: '',
+      taskCompleted: false,
+      currentTaskImage: '',
+      showFireworks: false, // Управление анимацией салюта
     };
   },
   methods: {
     handleStart(item) {
-      // Обработка клика в зависимости от типа задачи
       switch (item.type) {
         case 'Channel':
         case 'Partners':
           this.openTelegramLink(item.link);
-          this.currentLink = item.link; // Сохраняем ссылку для модального окна
-          this.currentReward = item.reward; // Сохраняем награду
-          this.currentTaskImage = this.getTaskImage(item.type); // Устанавливаем картинку для модального окна
-          this.showModal = true; // Показываем модальное окно после возвращения
+          this.currentLink = item.link;
+          this.currentReward = item.reward;
+          this.currentTaskImage = this.getTaskImage(item.type);
+          this.showModal = true;
           break;
         case 'Transaction':
-          this.openTelegramLink(item.link); // Переход по ссылке
-          this.currentReward = item.reward; // Сохраняем награду
-          this.showSuccessMessage = true; // Показываем сообщение о награде
+          this.openTelegramLink(item.link);
+          this.currentReward = item.reward;
+          this.showSuccessMessage = true;
           setTimeout(() => {
             this.showSuccessMessage = false;
           }, 3000);
 
-          // Помечаем задачу как выполненную
           const task = this.data.find((t) => t.id === item.id);
           if (task) {
             task.completed = true;
@@ -467,7 +427,6 @@ export default {
       }
     },
     getTaskImage(type) {
-      // Возвращаем картинку в зависимости от типа задачи
       switch (type) {
         case 'Channel':
           return 'https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png';
@@ -478,34 +437,31 @@ export default {
       }
     },
     openTelegramLink(url) {
-      // Используем метод Telegram WebApp для открытия ссылки
       if (window.Telegram && window.Telegram.WebApp) {
         window.Telegram.WebApp.openLink(url, { try_instant_view: true });
       } else {
-        // Если мини-приложение Telegram не доступно, открываем ссылку в новой вкладке
         window.open(url, '_blank');
       }
     },
     handleCheck() {
-      // Обработка нажатия на кнопку Check
-      this.taskCompleted = true; // Задача выполнена
-      this.showSuccessMessage = true; // Показываем сообщение об успехе
-      setTimeout(() => {
-        this.showSuccessMessage = false;
-      }, 3000);
+      this.taskCompleted = true;
+      this.showSuccessMessage = true;
+      this.showFireworks = true; // Запускаем анимацию салюта
 
-      // Помечаем задачу как выполненную
       const task = this.data.find((t) => t.link === this.currentLink);
       if (task) {
         task.completed = true;
       }
 
-      // Закрываем модальное окно
+      setTimeout(() => {
+        this.showSuccessMessage = false;
+        this.showFireworks = false; // Скрываем анимацию салюта
+      }, 3000);
+
       this.showModal = false;
     },
     handleGo() {
-      // Обработка нажатия на кнопку Go
-      this.openTelegramLink(this.currentLink); // Открываем ссылку через Telegram WebApp
+      this.openTelegramLink(this.currentLink);
     },
   },
 };
