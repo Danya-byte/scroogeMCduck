@@ -66,7 +66,7 @@
         <button class="game"></button>
       </RouterLink>
       <RouterLink to="/leader" class="nav-item" :class="{ active: $route.path === '/leader' }" exact>
-        <img src="https://i.postimg.cc/fRPzxjgn/0-F65-F8-E0-D77-D-464-C-B669-07-F0287-ABD7-C.png" width="50px">
+        <img src="https://i.postimg.cc/5082bz0d/icons8-leaderboard-80.png" width="50px">
         <button class="soon"></button>
       </RouterLink>
     </div>
