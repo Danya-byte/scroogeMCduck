@@ -164,8 +164,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  border-top-left-radius: 20px; /* Скругление слева */
-  border-top-right-radius: 20px; /* Скругление справа */
+  border-top-left-radius: 30px; /* Скругление слева */
+  border-top-right-radius: 30px; /* Скругление справа */
 }
 
 .bar .nav-item {
