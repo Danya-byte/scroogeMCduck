@@ -27,7 +27,7 @@
         <!-- Облачко с сообщением -->
         <transition name="fade">
           <div v-if="showFastTapMessage" class="chat-bubble">
-            Omg Tap-Tap Me Mate!
+            Tap-Tap!
           </div>
         </transition>
       </div>
