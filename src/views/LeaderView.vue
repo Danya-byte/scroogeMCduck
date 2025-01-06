@@ -22,15 +22,15 @@
     </div>
   </div>
   <div class="bar">
-    <RouterLink to="/task">
+    <RouterLink to="/task" class="nav-item" :class="{ active: $route.path === '/task' }">
       <img src="https://i.postimg.cc/kGxp19cP/5-CFA8313-0975-4-AE0-9986-E13-E9-B754-C11.png" width="40px" style="position: absolute; margin-left: 50vw; margin-top: 1vw">
       <button class="task"></button>
     </RouterLink>
-    <RouterLink to="/">
+    <RouterLink to="/" class="nav-item" :class="{ active: $route.path === '/' }">
       <img src="https://i.postimg.cc/66MKNfLs/D81-A5-CE1-57-CE-4417-A490-91-BCEF9-F5-B68.png" width="55px" style="position: absolute; margin-left: 8vw;">
       <button class="game"></button>
     </RouterLink>
-    <RouterLink to="/leader">
+    <RouterLink to="/leader" class="nav-item" :class="{ active: $route.path === '/leader' }">
       <img src="https://i.postimg.cc/fRPzxjgn/0-F65-F8-E0-D77-D-464-C-B669-07-F0287-ABD7-C.png" width="50px" style="position: absolute; margin-left: 12vw; margin-top: 3vw">
       <button class="soon"></button>
     </RouterLink>
@@ -116,6 +116,16 @@ h2 {
   height: 105px;
   margin-left: -1vw;
   color: rgb(17, 117, 193);
+}
+
+/* Стили для активного состояния */
+.bar .nav-item.active img {
+  filter: brightness(1.5); /* Увеличиваем яркость изображения */
+  border-bottom: 3px solid #007AFF; /* Добавляем синюю полосу снизу */
+}
+
+.bar .nav-item.active {
+  color: #007AFF; /* Изменяем цвет текста, если он есть */
 }
 </style>
 
