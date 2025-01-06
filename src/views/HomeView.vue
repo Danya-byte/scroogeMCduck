@@ -142,7 +142,7 @@ body {
   background-color: #2c2c2e;
   position: fixed;
   bottom: 0;
-  left: -10px; /* Сдвигаем панель влево на 20px */
+  left: -5px; /* Сдвигаем панель влево на 20px */
   width: 100%;
   height: 60px;
   display: flex;
