@@ -139,7 +139,7 @@ body {
 .chat-bubble {
   position: absolute;
   top: -30px; /* Позиция над монеткой */
-  right: -100px; /* Сдвигаем влево (было -200px) */
+  right: -50px; /* Сдвигаем влево (было -200px) */
   background-color: rgba(255, 255, 255, 0.9); /* Белый фон с прозрачностью */
   color: #333; /* Цвет текста */
   padding: 10px 15px;
