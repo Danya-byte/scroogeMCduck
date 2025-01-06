@@ -57,15 +57,15 @@
 
     <!-- Нижняя панель навигации -->
     <div class="bar">
-      <RouterLink to="/task" class="nav-item task-active">
+      <RouterLink to="/task" class="nav-item" :class="{ active: $route.path === '/task' }" exact>
         <img src="https://i.postimg.cc/kGxp19cP/5-CFA8313-0975-4-AE0-9986-E13-E9-B754-C11.png" width="40px">
         <button class="task"></button>
       </RouterLink>
-      <RouterLink to="/" class="nav-item">
+      <RouterLink to="/" class="nav-item" :class="{ active: $route.path === '/' }" exact>
         <img src="https://i.postimg.cc/66MKNfLs/D81-A5-CE1-57-CE-4417-A490-91-BCEF9-F5-B68.png" width="55px">
         <button class="game"></button>
       </RouterLink>
-      <RouterLink to="/leader" class="nav-item">
+      <RouterLink to="/leader" class="nav-item" :class="{ active: $route.path === '/leader' }" exact>
         <img src="https://i.postimg.cc/fRPzxjgn/0-F65-F8-E0-D77-D-464-C-B669-07-F0287-ABD7-C.png" width="50px">
         <button class="soon"></button>
       </RouterLink>
@@ -169,23 +169,15 @@
   border-top-right-radius: 30px; /* Скругление справа */
 }
 
-
-
-/* Стили для активной кнопки задач */
-.bar .nav-item.task-active img {
-  filter: brightness(0) saturate(100%) invert(25%) sepia(90%) saturate(2000%) hue-rotate(220deg) brightness(90%) contrast(90%); /* Темно-синий цвет */
+.bar .nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 
-/* Стили для активной кнопки игры */
-.bar .nav-item.game-active img {
-  filter: brightness(1.5); /* Подсветка иконки */
-  border-bottom: 3px solid #FFD700; /* Золотая полоса */
-}
-
-/* Стили для активной кнопки лидерборда */
-.bar .nav-item.leader-active img {
-  filter: brightness(1.5); /* Подсветка иконки */
-  border-bottom: 3px solid #FF6347; /* Оранжевая полоса */
+.bar .nav-item.active img {
+  filter: brightness(1.5); /* Подсветка активной иконки */
 }
 
 .bar button {
@@ -199,7 +191,208 @@
   cursor: pointer;
 }
 
-/* Остальные стили остаются без изменений */
+/* Стили для кнопки Start */
+.start-button {
+  font-family: Quicksand;
+  font-size: 18px;
+  font-weight: 600;
+  color: #3390ec;
+  border: 2px solid #3390ec;
+  border-radius: 25px;
+  padding: 8px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.start-button.disabled {
+  background-color: #444444;
+  color: #777777;
+  cursor: not-allowed;
+}
+
+.start-button:hover:not(.disabled) {
+  background-color: #3390ec;
+  color: white;
+}
+
+/* Модальное окно */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Окно снизу */
+  z-index: 1000;
+}
+
+.modal {
+  background: #2c2c2e;
+  border-radius: 20px 20px 0 0; /* Скругленные углы сверху */
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.modal-button.check {
+  background-color: #3390ec;
+  color: white;
+}
+
+.modal-button.check:hover {
+  background-color: #2a7bbf;
+}
+
+.modal-button.go {
+  background-color: #444444;
+  color: white;
+}
+
+.modal-button.go:hover {
+  background-color: #555555;
+}
+
+/* Сообщение об успешном присоединении */
+.success-message-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.success-message {
+  background: #3390ec;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  animation: fadeInOut 3s ease-in-out;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Анимация салюта */
+.fireworks {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.fireworks.left {
+  left: -120px; /* Салют слева от сообщения */
+}
+
+.fireworks.right {
+  right: -120px; /* Салют справа от сообщения */
+}
+
+.fireworks::before,
+.fireworks::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/sparkles_2728.png') no-repeat center center;
+  background-size: contain;
+  animation: fireworksAnimation 1s ease-in-out;
+}
+
+.fireworks.left::before {
+  top: 0;
+  left: 0;
+  animation-delay: 0s;
+}
+
+.fireworks.left::after {
+  top: 50%;
+  left: 50%;
+  animation-delay: 0.5s;
+}
+
+.fireworks.right::before {
+  top: 0;
+  right: 0;
+  animation-delay: 0s;
+}
+
+.fireworks.right::after {
+  top: 50%;
+  right: 50%;
+  animation-delay: 0.5s;
+}
+
+@keyframes fireworksAnimation {
+  0% { transform: translateY(0) scale(0); opacity: 0; }
+  50% { transform: translateY(-50px) scale(1); opacity: 1; }
+  100% { transform: translateY(-100px) scale(0); opacity: 0; }
+}
+
+/* Зеленая галочка и прозрачный зеленый фон */
+.completed-overlay {
+  background: rgba(76, 175, 80, 0.3); /* Прозрачный зеленый */
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Стили для завершенных задач */
+.completed-task {
+  position: relative;
+  overflow: hidden;
+}
+
+.completed-task::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(76, 175, 80, 0.3); /* Прозрачный зеленый */
+  z-index: 1;
+}
+
+.completed-task .start-button {
+  background-color: #4CAF50; /* Зеленый цвет для кнопки */
+  color: white;
+  cursor: not-allowed;
+}
 </style>
 
 <script>
