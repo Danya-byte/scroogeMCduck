@@ -144,7 +144,7 @@ body {
   bottom: 0;
   left: -5px; /* Сдвигаем панель влево на 20px */
   width: 100%;
-  height: 60px;
+  height: 45px;
   display: flex;
   justify-content: space-between;
   align-items: center;
