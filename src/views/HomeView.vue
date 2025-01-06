@@ -35,15 +35,15 @@
 
     <!-- Нижняя панель навигации -->
     <div class="bar">
-      <RouterLink to="/task" class="nav-item" :class="{ active: $route.path === '/task' }" exact>
+      <RouterLink to="/task" class="nav-item" >
         <img src="https://i.postimg.cc/kGxp19cP/5-CFA8313-0975-4-AE0-9986-E13-E9-B754-C11.png" width="40px" />
         <button class="task"></button>
       </RouterLink>
-      <RouterLink to="/" class="nav-item" :class="{ active: $route.path === '/' }" exact>
+      <RouterLink to="/" class="nav-item game-active" >
         <img src="https://i.postimg.cc/66MKNfLs/D81-A5-CE1-57-CE-4417-A490-91-BCEF9-F5-B68.png" width="55px" />
         <button class="game"></button>
       </RouterLink>
-      <RouterLink to="/leader" class="nav-item" :class="{ active: $route.path === '/leader' }" exact>
+      <RouterLink to="/leader" class="nav-item">
         <img src="https://i.postimg.cc/fRPzxjgn/0-F65-F8-E0-D77-D-464-C-B669-07-F0287-ABD7-C.png" width="50px" />
         <button class="soon"></button>
       </RouterLink>
@@ -197,20 +197,8 @@ body {
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.bar .nav-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-}
-
-.bar .nav-item.active img {
-  filter: brightness(1.5); /* Увеличиваем яркость изображения */
-  border-bottom: 3px solid #007AFF; /* Добавляем синюю полосу снизу */
-}
-
-.bar .nav-item.active {
-  color: #007AFF; /* Изменяем цвет текста, если он есть */
+.bar .nav-item.game-active img {
+  filter: brightness(0) saturate(100%) invert(25%) sepia(90%) saturate(2000%) hue-rotate(220deg) brightness(90%) contrast(90%); /* Темно-синий цвет */
 }
 
 .bar button {
