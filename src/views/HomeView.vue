@@ -205,7 +205,12 @@ body {
 }
 
 .bar .nav-item.active img {
-  filter: brightness(1.5);
+  filter: brightness(1.5); /* Увеличиваем яркость изображения */
+  border-bottom: 3px solid #007AFF; /* Добавляем синюю полосу снизу */
+}
+
+.bar .nav-item.active {
+  color: #007AFF; /* Изменяем цвет текста, если он есть */
 }
 
 .bar button {
