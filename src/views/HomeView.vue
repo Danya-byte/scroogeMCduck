@@ -24,13 +24,13 @@
         <transition name="fade">
           <span v-if="showPlusOne" class="plus-one">+1</span>
         </transition>
+        <!-- Облачко с сообщением -->
+        <transition name="fade">
+          <div v-if="showFastTapMessage" class="chat-bubble">
+            Omg Tap-Tap Me Mate!
+          </div>
+        </transition>
       </div>
-      <!-- Сообщение при быстром прокликивании -->
-      <transition name="fade">
-        <div v-if="showFastTapMessage" class="fast-tap-message">
-          Omg Tap-Tap Me Mate!
-        </div>
-      </transition>
     </div>
 
     <!-- Нижняя панель навигации -->
@@ -135,33 +135,38 @@ body {
   }
 }
 
-/* Сообщение при быстром прокликивании */
-.fast-tap-message {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+/* Стили для облачка с сообщением */
+.chat-bubble {
+  position: absolute;
+  top: -50px; /* Позиция над монеткой */
+  right: -200px; /* Сдвигаем вправо */
+  background-color: rgba(255, 255, 255, 0.9); /* Белый фон с прозрачностью */
+  color: #333; /* Цвет текста */
+  padding: 10px 15px;
+  border-radius: 15px;
   font-family: Geologica;
-  font-size: 24px;
-  color: #ffd700;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 10px 20px;
-  border-radius: 10px;
+  font-size: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень для эффекта облачка */
   animation: fadeInOut 2s ease-in-out; /* Анимация появления и исчезновения */
 }
 
+/* Анимация появления и исчезновения */
 @keyframes fadeInOut {
   0% {
     opacity: 0;
+    transform: translateY(10px);
   }
   10% {
     opacity: 1;
+    transform: translateY(0);
   }
   90% {
     opacity: 1;
+    transform: translateY(0);
   }
   100% {
     opacity: 0;
+    transform: translateY(10px);
   }
 }
 
