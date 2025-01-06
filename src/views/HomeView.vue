@@ -25,6 +25,12 @@
           <span v-if="showPlusOne" class="plus-one">+1</span>
         </transition>
       </div>
+      <!-- Сообщение при быстром прокликивании -->
+      <transition name="fade">
+        <div v-if="showFastTapMessage" class="fast-tap-message">
+          Omg Tap-Tap Me Mate!
+        </div>
+      </transition>
     </div>
 
     <!-- Нижняя панель навигации -->
@@ -111,9 +117,11 @@ body {
   left: 50%;
   transform: translateX(-50%);
   font-family: Geologica;
-  font-size: 24px;
+  font-size: 36px; /* Увеличили размер шрифта */
   color: #ffd700; /* Золотой цвет */
-  animation: floatUp 0.5s ease-in-out;
+  animation: floatUp 0.8s ease-in-out;
+  font-weight: bold; /* Делаем текст жирным */
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8); /* Добавляем тень для эффекта свечения */
 }
 
 @keyframes floatUp {
@@ -123,7 +131,37 @@ body {
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -50px);
+    transform: translate(-50%, -100px); /* Увеличили расстояние */
+  }
+}
+
+/* Сообщение при быстром прокликивании */
+.fast-tap-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Geologica;
+  font-size: 24px;
+  color: #ffd700;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  border-radius: 10px;
+  animation: fadeInOut 2s ease-in-out; /* Анимация появления и исчезновения */
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
@@ -198,6 +236,8 @@ const db = getDatabase(app);
 const likeCount = ref(0);
 const isShaking = ref(false); // Для анимации тряски
 const showPlusOne = ref(false); // Для отображения +1
+const showFastTapMessage = ref(false); // Для отображения сообщения
+const lastTapTime = ref(0); // Время последнего клика
 
 const getUser = () => {
   return window.Telegram.WebApp.initDataUnsafe.user.username;
@@ -222,10 +262,20 @@ const tap = async () => {
       isShaking.value = false;
     }, 200);
 
-    // Скрываем +1 через 500 мс
+    // Скрываем +1 через 800 мс
     setTimeout(() => {
       showPlusOne.value = false;
-    }, 500);
+    }, 800);
+
+    // Проверка на быстрый клик
+    const currentTime = Date.now();
+    if (currentTime - lastTapTime.value < 300) {
+      showFastTapMessage.value = true;
+      setTimeout(() => {
+        showFastTapMessage.value = false;
+      }, 2000); // Скрываем сообщение через 2 секунды
+    }
+    lastTapTime.value = currentTime; // Обновляем время последнего клика
   } catch (error) {
     console.error('Error updating taps:', error);
   }
