@@ -76,15 +76,11 @@
       <div class="modal">
         <div class="modal-content">
           <img
-            v-if="!taskCompleted"
-            src="https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png"
+            :src="currentTaskImage"
             width="80px"
             height="80px"
             style="border-radius: 50%;"
           />
-          <div v-else class="completed-overlay">
-            <img src="https://em-content.zobj.net/source/telegram/386/check-mark-button_2705.webp" width="80px" height="80px">
-          </div>
           <p style="margin-top: 10px; font-size: 16px; color: #fff;">Подпишитесь на канал:</p>
           <a :href="currentLink" target="_blank" style="color: #3390ec; text-decoration: none;">{{ currentLink }}</a>
           <div style="display: flex; gap: 10px; margin-top: 20px;">
@@ -396,21 +392,6 @@
   color: white;
   cursor: not-allowed;
 }
-
-.completed-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  animation: checkmarkAnimation 0.5s ease-in-out;
-}
-
-@keyframes checkmarkAnimation {
-  0% { transform: translate(-50%, -50%) scale(0); }
-  50% { transform: translate(-50%, -50%) scale(1.2); }
-  100% { transform: translate(-50%, -50%) scale(1); }
-}
 </style>
 
 <script>
@@ -452,6 +433,7 @@ export default {
       currentLink: '', // Текущая ссылка для модального окна
       currentReward: '', // Текущая награда для сообщения
       taskCompleted: false, // Задача выполнена
+      currentTaskImage: '', // Переменная для хранения текущей картинки
     };
   },
   methods: {
@@ -463,6 +445,7 @@ export default {
           this.openTelegramLink(item.link);
           this.currentLink = item.link; // Сохраняем ссылку для модального окна
           this.currentReward = item.reward; // Сохраняем награду
+          this.currentTaskImage = this.getTaskImage(item.type); // Устанавливаем картинку для модального окна
           this.showModal = true; // Показываем модальное окно после возвращения
           break;
         case 'Transaction':
@@ -481,6 +464,17 @@ export default {
           break;
         default:
           console.log('Неизвестный тип задачи:', item.type);
+      }
+    },
+    getTaskImage(type) {
+      // Возвращаем картинку в зависимости от типа задачи
+      switch (type) {
+        case 'Channel':
+          return 'https://i.postimg.cc/xCj2Qkp5/2587-D1-A6-37-E0-45-B0-89-E4-3-F4-D29-E83130.png';
+        case 'Partners':
+          return 'https://i.postimg.cc/mZnL0Gsf/2-C2-FD02-E-0-BB2-4-E91-A52-A-FAF4-BB160-FD3.png';
+        default:
+          return '';
       }
     },
     openTelegramLink(url) {
