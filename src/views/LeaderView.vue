@@ -22,15 +22,15 @@
     </div>
   </div>
   <div class="bar">
-    <RouterLink to="/task" class="nav-item" :class="{ active: $route.path === '/task' }">
+    <RouterLink to="/task" class="nav-item" :class="{ active: $route.path === '/task' }" exact>
       <img src="https://i.postimg.cc/kGxp19cP/5-CFA8313-0975-4-AE0-9986-E13-E9-B754-C11.png" width="40px" style="position: absolute; margin-left: 50vw; margin-top: 1vw">
       <button class="task"></button>
     </RouterLink>
-    <RouterLink to="/" class="nav-item" :class="{ active: $route.path === '/' }">
+    <RouterLink to="/" class="nav-item" :class="{ active: $route.path === '/' }" exact>
       <img src="https://i.postimg.cc/66MKNfLs/D81-A5-CE1-57-CE-4417-A490-91-BCEF9-F5-B68.png" width="55px" style="position: absolute; margin-left: 8vw;">
       <button class="game"></button>
     </RouterLink>
-    <RouterLink to="/leader" class="nav-item" :class="{ active: $route.path === '/leader' }">
+    <RouterLink to="/leader" class="nav-item" :class="{ active: $route.path === '/leader' }" exact>
       <img src="https://i.postimg.cc/fRPzxjgn/0-F65-F8-E0-D77-D-464-C-B669-07-F0287-ABD7-C.png" width="50px" style="position: absolute; margin-left: 12vw; margin-top: 3vw">
       <button class="soon"></button>
     </RouterLink>
